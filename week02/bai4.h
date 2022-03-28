@@ -15,7 +15,7 @@ public:
 };
 template <class T>
 Vector <T>::Vector() {
-	this._size = 0;
+	this->_size = 0;
 	this->arr = new T[200010];
 }
 template <class T>
@@ -24,7 +24,7 @@ Vector <T>::~Vector() {
 }
 template <class T>
 void Vector <T>::push_back(T val) {
-	arr[size++] = val;
+	arr[_size++] = val;
 }
 template <class T>
 int Vector <T>::size() {
@@ -42,6 +42,6 @@ public:
 	int* BFS();
 };
 int* Graph::BFS() {
-	int* res;
+	int* res = new int[10];
 	return res;
 }
