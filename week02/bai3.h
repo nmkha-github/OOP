@@ -9,8 +9,8 @@ struct node {
 template <class T>
 class List {
 private:
-	node* head;
-	node* createNode(T val) {
+	node <int> *head;
+	node <int> *createNode(T val) {
 
 	}
 public:
@@ -19,5 +19,6 @@ public:
 template <class T>
 class Queue {
 private:
+
 public:
 };
