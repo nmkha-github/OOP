@@ -9,8 +9,8 @@ struct node {
 template <class T>
 class List {
 private:
-	node <int> *head;
-	node <int> *createNode(T val) {
+	node <T> *head;
+	node <T> *createNode(T val) {
 
 	}
 public:
