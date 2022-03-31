@@ -28,7 +28,7 @@ class OOP
         Scanner Nhap=new Scanner(System.in);
         float F=Nhap.nextFloat();
         System.out.println("Ket qua: ");
-        System.out.println((F-32)*5/9);
+        System.out.println((F-32)*5f/9f);
     }
     public static void Cau3_C2F()
     {
@@ -36,7 +36,7 @@ class OOP
         Scanner Nhap=new Scanner(System.in);
         float C=Nhap.nextFloat();
         System.out.println("Ket qua: ");
-        System.out.println((C*9/5)+32);
+        System.out.println((C*9f/5f)+32);
     }
     public static void Cau5()
     {
