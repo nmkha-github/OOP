@@ -118,7 +118,7 @@ List <T>::~List() {
 		head = head->next;
 		delete del;
 	}
-	delete head;
+	if (head != NULL) delete head;
 }
 template <class T>
 class Queue
