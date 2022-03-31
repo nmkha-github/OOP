@@ -12,8 +12,8 @@ private:
 public:
     Vector();
     Vector(int n, T val);
-    ~Vector();
-    void push_back(T val);
+    //~Vector();
+    void push_back(const T& val);
     int size();
     T& operator[](int index);
 };
@@ -31,13 +31,13 @@ Vector <T>::Vector(int n, T val) {
     this->arr = new T[_capacity];
     for (int i = 0; i < _capacity; i++) this->arr[i] = val;
 }
-template <class T>
-Vector <T>::~Vector() {
-    delete[] arr;
-}
+//template <class T>
+//Vector <T>::~Vector() {
+//    if (arr != NULL) delete[] arr;
+//}
 
 template <class T>
-void Vector <T>::push_back(T val) {
+void Vector <T>::push_back(const T& val) {
     if (_capacity < _size + 1) {
         T *del = this->arr;
         _capacity *= 2;
@@ -72,11 +72,11 @@ Graph::Graph() {
     _N = 0;
 }
 Graph::~Graph() {
-    delete[] _danhSachKe;
+    if (_danhSachKe != NULL) delete[] _danhSachKe;
 }
 void Graph::input() {
     cout << "Nhap so dinh: "; cin >> this->_N;
-    _danhSachKe = new Vector <int>[_N];
+    _danhSachKe = new Vector <int>[_N + 1];
     int n;
     cout << "Nhap so canh: "; cin >> n;
     for (int i = 0; i < n; i++) {
@@ -90,8 +90,11 @@ void Graph::input() {
 }
 Vector <int> Graph::bfs(int start) {
     Queue <int> q;
-    Vector <bool> Free(_N, 1);
+    Vector <bool> Free(_N + 1, 1);
     Vector <int> res;
+    if (start > _N) {
+        return res;
+    }
     q.push(start);
     while (q.size()) {
         int u = q.top(); q.pop();
