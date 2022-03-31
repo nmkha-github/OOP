@@ -147,10 +147,3 @@ string Queue::top() {
 int Queue::size() {
 	return list.getSize();
 }
-
-int main() {
-	Queue q;
-	q.push("hello");
-	cout << q.top();
-	return 1;
-}
