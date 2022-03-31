@@ -7,6 +7,7 @@ class OOP
 {
     public static void Cau1()
     {
+        System.out.println("----------Cau 1----------");
         System.out.println("Ten: Hoang Tuan Anh");
         System.out.println("Ngay sinh: 10/07/2002");
         System.out.println("MSSV: 20120244");
@@ -14,6 +15,7 @@ class OOP
 
     public static void Cau2()
     {
+        System.out.println("----------Cau 2----------");
         Scanner Nhap=new Scanner(System.in);
         System.out.println("Nhap chieu dai: ");
         int dai=Nhap.nextInt();
@@ -24,6 +26,7 @@ class OOP
     }
     public static void Cau3_F2C()
     {
+        System.out.println("----------Cau 3 F->C----------");
         System.out.println("Nhap do F: ");
         Scanner Nhap=new Scanner(System.in);
         float F=Nhap.nextFloat();
@@ -32,6 +35,7 @@ class OOP
     }
     public static void Cau3_C2F()
     {
+        System.out.println("----------Cau 3 C->F----------");
         System.out.println("Nhap do F: ");
         Scanner Nhap=new Scanner(System.in);
         float C=Nhap.nextFloat();
@@ -40,6 +44,7 @@ class OOP
     }
     public static void Cau5()
     {
+        System.out.println("----------Cau 5----------");
         System.out.println("Nhap 3 so: ");
         Scanner Nhap=new Scanner(System.in);
         int a=Nhap.nextInt();
@@ -55,6 +60,7 @@ class OOP
     }
     public static void Cau6()
     {
+        System.out.println("----------Cau 6----------");
         System.out.println("Nhap so: ");
         Scanner Nhap=new Scanner(System.in);
         int a=Nhap.nextInt();
@@ -64,6 +70,7 @@ class OOP
     }
     public static void Cau8a()
     {
+        System.out.println("----------Cau 8a----------");
         System.out.println("Nhap n: ");
         Scanner Nhap=new Scanner(System.in);
         int n=Nhap.nextInt();
@@ -77,6 +84,7 @@ class OOP
     }
     public static void Cau8b()
     {
+        System.out.println("----------Cau 8b----------");
         System.out.println("Nhap n: ");
         Scanner Nhap=new Scanner(System.in);
         int n=Nhap.nextInt();
@@ -90,6 +98,7 @@ class OOP
     }
     public static void Cau8c()
     {
+        System.out.println("----------Cau 8c----------");
         System.out.println("Nhap n: ");
         Scanner Nhap=new Scanner(System.in);
         int n=Nhap.nextInt();
@@ -103,6 +112,7 @@ class OOP
     }
     public static void Cau8d()
     {
+        System.out.println("----------Cau 8d----------");
         System.out.println("Nhap n: ");
         Scanner Nhap=new Scanner(System.in);
         int n=Nhap.nextInt();
@@ -117,6 +127,7 @@ class OOP
     }
     public static void Cau8e()
     {
+        System.out.println("----------Cau 8e----------");
         System.out.println("Nhap n: ");
         Scanner Nhap=new Scanner(System.in);
         int n=Nhap.nextInt();
@@ -145,6 +156,7 @@ class OOP
     }
     public static void Cau15()
     {
+        System.out.println("----------Cau 15----------");
         int n=0;
         Scanner Nhap=new Scanner(System.in);
         do{
