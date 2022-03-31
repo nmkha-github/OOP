@@ -1,4 +1,5 @@
 #pragma once
+#include "bai3.h"
 #include <iostream>
 using namespace std;
 
@@ -10,6 +11,7 @@ private:
     T* arr;
 public:
     Vector();
+    Vector(int n, T val);
     ~Vector();
     void push_back(T val);
     int size();
@@ -22,7 +24,13 @@ Vector <T>::Vector() {
     this->_capacity = 1;
     this->arr = new T[_capacity];
 }
-
+template <class T>
+Vector <T>::Vector(int n, T val) {
+    this->_size = 0;
+    this->_capacity = n;
+    this->arr = new T[_capacity];
+    for (int i = 0; i < _capacity; i++) this->arr[i] = val;
+}
 template <class T>
 Vector <T>::~Vector() {
     delete[] arr;
@@ -49,69 +57,53 @@ T& Vector <T>::operator[](int index) {
     return arr[index];
 };
 
-
-
-struct DinhKe {
-    int val, cost;
-    DinhKe* next;
-};
-
-struct Canh {
-    int DinhDau, DinhCuoi, TrongSo;
-};
-
 class Graph {
-
-    DinhKe* ThemDinhVaoDanhSachKe(int value, int trongso, DinhKe* head) {
-        DinhKe* newNode = new DinhKe;
-        newNode->val = value;
-        newNode->cost = trongso;
-
-        newNode->next = head;
-        return newNode;
-    }
-    int N;
+private:
+    Vector <int>* _danhSachKe;
+    int _N;
 public:
-    DinhKe** head; // danh sach ke la mang con tro
-
-    // constructor
-    Graph(Canh CacCanh[], int n, int N) {
-        head = new DinhKe * [N]();
-        this->N = N;
-
-        for (int i = 0; i < N; ++i)
-            head[i] = nullptr;
-
-        for (unsigned i = 0; i < n; i++) {
-            int DinhDau = CacCanh[i].DinhDau;
-            int DinhCuoi = CacCanh[i].DinhCuoi;
-            int TrongSo = CacCanh[i].TrongSo;
-
-            DinhKe* newNode = ThemDinhVaoDanhSachKe(DinhCuoi, TrongSo, head[DinhDau]);
-
-
-            head[DinhDau] = newNode;
+    Graph();
+    ~Graph();
+    void input();
+    Vector <int> bfs(int u);
+};
+Graph::Graph() {
+    _danhSachKe = NULL;
+    _N = 0;
+}
+Graph::~Graph() {
+    delete[] _danhSachKe;
+}
+void Graph::input() {
+    cout << "Nhap so dinh: "; cin >> this->_N;
+    _danhSachKe = new Vector <int>[_N];
+    int n;
+    cout << "Nhap so canh: "; cin >> n;
+    for (int i = 0; i < n; i++) {
+        cout << "Nhap canh thu " << i + 1 << ":\n";
+        int u, v;
+        cout << "Nhap dinh 1: "; cin >> u;
+        cout << "Nhap dinh 2: "; cin >> v;
+        this->_danhSachKe[u].push_back(v);
+        this->_danhSachKe[v].push_back(u);
+    }
+}
+Vector <int> Graph::bfs(int start) {
+    Queue <int> q;
+    Vector <bool> Free(_N, 1);
+    Vector <int> res;
+    q.push(start);
+    while (q.size()) {
+        int u = q.top(); q.pop();
+        Free[u] = 0;
+        res.push_back(u);
+        for (int i = 0; i < _danhSachKe[u].size(); i++) {
+            int v = _danhSachKe[u][i];
+            if (Free[v]) {
+                q.push(v);
+                Free[v] = 0;
+            }
         }
     }
-    // destructor
-    ~Graph() {
-        for (int i = 0; i < N; i++)
-            delete[] head[i];
-        delete[] head;
-    }
-    int* BFS();
-};
-
-int* Graph::BFS() {
-    int* res = new int[10];
     return res;
-}
-void CanhKeCuaMotDinh(DinhKe* ptr, int i)
-{
-    while (ptr != nullptr) {
-        cout << "(" << i << ", " << ptr->val
-            << ", " << ptr->cost << ") ";
-        ptr = ptr->next;
-    }
-    cout << endl;
 }
