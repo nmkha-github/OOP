@@ -2,58 +2,59 @@
 #include <string>
 #include <iostream>
 using namespace std;
-
+template <class T>
 struct node {
-	string data;
-	node* next;
+	T data;
+	node <T>* next;
 };
-
+template <class T>
 class List
 {
 private:
-	node* head;
-	node* tail;
+	node <T>* head;
+	node <T>* tail;
 	int size_;
-	node* createNode(string val) {
-		node* p = new node;
+	node <T>* createNode(T val) {
+		node <T>* p = new node <T>;
 		p->data = val;
 		p->next = NULL;
 		return p;
 	}
 public:
 	List();
-	List(string valHead);
-	List(string valHead, string valTail);
-	void insertNode(string val, int pos);
+	List(T valHead);
+	List(T valHead, T valTail);
+	void insertNode(T val, int pos);
 	void deleteNode(int pos);
 	int getSize();
-	string getValueAt(int pos);
+	T getValueAt(int pos);
 	~List();
 };
 
-List::List() {
-	head = new node;
-	tail = new node;
+template <class T>
+List <T>::List() {
+	head = NULL;
+	tail = NULL;
 	size_ = 0;
 }
-
-List::List(string valHead) {
+template <class T>
+List <T>::List(T valHead) {
 	head = createNode(valHead);
 	tail = head;
 	size_ = 1;
 }
-
-List::List(string valHead, string valTail) {
+template <class T>
+List <T>::List(T valHead, T valTail) {
 	head = createNode(valHead);
 	tail = createNode(valTail);
 	head->next = tail;
 	size_ = 2;
 }
-
-void List::insertNode(string val, int pos) {
-	node* add = createNode(val);
-	if (pos > 0 && pos < size_-1) {
-		node* p = head;
+template <class T>
+void List <T>::insertNode(T val, int pos) {
+	node <T>* add = createNode(val);
+	if (pos > 0 && pos < size_ - 1) {
+		node <T>* p = head;
 		for (int i = 0; i < pos; i++) {
 			p = p->next;
 		}
@@ -64,22 +65,23 @@ void List::insertNode(string val, int pos) {
 	else if (pos == 0) {
 		add->next = head;
 		head = add;
+		tail = head;
 		size_++;
 	}
-	else if(pos == size_ - 1) {
+	else if (pos == size_) {
 		tail->next = add;
-		tail == add;
+		tail = add;
 		size_++;
 	}
 }
-
-void List::deleteNode(int pos) {
+template <class T>
+void List <T>::deleteNode(int pos) {
 	if (pos > 0 && pos < size_) {
-		node* p = head;
-		for (int i = 0; i < pos-1; i++) {
+		node <T>* p = head;
+		for (int i = 0; i < pos - 1; i++) {
 			p = p->next;
 		}
-		node* del = p->next;
+		node <T>* del = p->next;
 		p->next = del->next;
 		delete del;
 		if (pos == size_ - 1) {
@@ -88,62 +90,62 @@ void List::deleteNode(int pos) {
 		size_--;
 	}
 	else if (pos == 0) {
-		node* p = head;
+		node <T>* p = head;
 		head = head->next;
 		delete p;
 		size_--;
 	}
 }
-
-int List::getSize() {
+template <class T>
+int List <T>::getSize() {
 	return size_;
 }
-
-string List::getValueAt(int pos) {
+template <class T>
+T List <T>::getValueAt(int pos) {
 	if (pos < 0)
-		return "NULL";
+		return NULL;
 	else if (pos >= 0 && pos < size_) {
-		node* p = head;
+		node <T>* p = head;
 		for (int i = 0; i < pos; i++)
 			p = p->next;
 		return p->data;
 	}
 }
-
-List::~List() {
-	while (!head) {
-		node* del = head;
+template <class T>
+List <T>::~List() {
+	while (head) {
+		node <T>* del = head;
 		head = head->next;
 		delete del;
 	}
 	delete head;
-	delete tail;
 }
-
+template <class T>
 class Queue
 {
 private:
-	List list;
+	List <T> list;
 public:
-	void push(string data);
+	void push(T data);
 	void pop();
-	string top();
+	T top();
 	int size();
 };
-
-void Queue::push(string data)
+template <class T>
+void Queue <T>::push(T data)
 {
-	list.insertNode(data, 0);
+	list.insertNode(data, list.getSize());
 }
-
-void Queue::pop() {
+template <class T>
+void Queue <T>::pop() {
+	if (list.getSize() == 0) return;
 	list.deleteNode(0);
 }
-
-string Queue::top() {
+template <class T>
+T Queue <T>::top() {
 	return list.getValueAt(0);
 }
-
-int Queue::size() {
+template <class T>
+int Queue <T>::size() {
 	return list.getSize();
 }
