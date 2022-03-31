@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.Math;
 
 import javax.sql.rowset.CachedRowSet;
 
@@ -11,30 +12,33 @@ class OOP
         System.out.println("MSSV: 20120244");
     }
 
-    public static int Cau2()
+    public static void Cau2()
     {
         Scanner Nhap=new Scanner(System.in);
         System.out.println("Nhap chieu dai: ");
         int dai=Nhap.nextInt();
         System.out.println("Nhap chieu rong");
         int rong=Nhap.nextInt();
-        return dai*rong;
+        System.out.println("Ket qua: ");
+        System.out.println(dai*rong);
     }
-    public static float Cau3_F2C()
+    public static void Cau3_F2C()
     {
         System.out.println("Nhap do F: ");
         Scanner Nhap=new Scanner(System.in);
         float F=Nhap.nextFloat();
-        return (F-32)*5/9;
+        System.out.println("Ket qua: ");
+        System.out.println((F-32)*5/9);
     }
-    public static float Cau3_C2F()
+    public static void Cau3_C2F()
     {
         System.out.println("Nhap do F: ");
         Scanner Nhap=new Scanner(System.in);
         float C=Nhap.nextFloat();
-        return (C*9/5)+32;
+        System.out.println("Ket qua: ");
+        System.out.println((C*9/5)+32);
     }
-    public static int Cau4()
+    public static void Cau5()
     {
         System.out.println("Nhap 3 so: ");
         Scanner Nhap=new Scanner(System.in);
@@ -46,18 +50,19 @@ class OOP
         min=b;
         if(min>c)
         min=c;
-        return min;
+        System.out.println("Ket qua: ");
+        System.out.println(min);
     }
-    public static boolean Cau5()
+    public static void Cau6()
     {
         System.out.println("Nhap so: ");
         Scanner Nhap=new Scanner(System.in);
         int a=Nhap.nextInt();
         if(a%2==0)
-        return true;
-        else return false;
+        System.out.println("Chan");
+        else System.out.println("Le");
     }
-    public static int Cau6a()
+    public static void Cau8a()
     {
         System.out.println("Nhap n: ");
         Scanner Nhap=new Scanner(System.in);
@@ -67,34 +72,23 @@ class OOP
         {
             ketqua+=i;
         }
-        return ketqua;
+        System.out.println("Ket qua: ");
+        System.out.println(ketqua);
     }
-    
-    public static int Cau6c()
+    public static void Cau8b()
     {
         System.out.println("Nhap n: ");
         Scanner Nhap=new Scanner(System.in);
         int n=Nhap.nextInt();
-        int ketqua=0;
-        for(int i=0;i<=n;i++)
+        int ketqua=1;
+        for(int i=1;i<=n;i++)
         {
-            ketqua+=2^i;
+            ketqua*=i;
         }
-        return ketqua;
+        System.out.println("Ket qua: ");
+        System.out.println(ketqua);
     }
-    public static float Cau6d()
-    {
-        System.out.println("Nhap n: ");
-        Scanner Nhap=new Scanner(System.in);
-        int n=Nhap.nextInt();
-        float ketqua=0;
-        for(int i=2;i<=n;i+=2)
-        {
-            ketqua+=1/i;
-        }
-        return ketqua;
-    }
-    public static int Cau6e()
+    public static void Cau8c()
     {
         System.out.println("Nhap n: ");
         Scanner Nhap=new Scanner(System.in);
@@ -102,9 +96,37 @@ class OOP
         int ketqua=0;
         for(int i=1;i<=n;i++)
         {
-            ketqua+=i^2;
+            ketqua+=Math.pow(2,i);
         }
-        return ketqua;
+        System.out.println("Ket qua: ");
+        System.out.println(ketqua);
+    }
+    public static void Cau8d()
+    {
+        System.out.println("Nhap n: ");
+        Scanner Nhap=new Scanner(System.in);
+        int n=Nhap.nextInt();
+        float ketqua=0;
+        for(int i=2;i<=n;i+=2)
+        {
+            ketqua+=(1f/(float)i);
+            
+        }
+        System.out.println("Ket qua: ");
+        System.out.println(ketqua);
+    }
+    public static void Cau8e()
+    {
+        System.out.println("Nhap n: ");
+        Scanner Nhap=new Scanner(System.in);
+        int n=Nhap.nextInt();
+        int ketqua=0;
+        for(int i=1;i<=n;i++)
+        {
+            ketqua+=Math.pow(i,2);
+        }
+        System.out.println("Ket qua: ");
+        System.out.println(ketqua);
     }
 
     public static int Input()
@@ -116,7 +138,6 @@ class OOP
         System.out.println("4. Snack ");
         System.out.println("5. Shutdown machine");
         System.out.println("Nhap so: ");
-        System.out.println("Nhap n: ");
         Scanner Nhap=new Scanner(System.in);
         int n=Nhap.nextInt();
         return n;
@@ -137,8 +158,8 @@ class OOP
             System.out.println("Khong du tien");
             else 
             {
-                System.out.println("Tien du: ");
-                System.out.print(money1-1);
+                System.out.print("Tien du: ");System.out.println(money1-1);
+                
             }
             break;
 
@@ -149,8 +170,8 @@ class OOP
             System.out.println("Khong du tien");
             else 
             {
-                System.out.println("Tien du: ");
-                System.out.print(money2-2);
+                System.out.print("Tien du: ");System.out.println(money2-2);
+                
             }
             break;
 
@@ -161,8 +182,8 @@ class OOP
             System.out.println("Khong du tien");
             else 
             {
-                System.out.println("Tien du: ");
-                System.out.print(money3-3);
+                System.out.print("Tien du: ");System.out.println(money3-3);
+                
             }
             break;
 
@@ -173,15 +194,15 @@ class OOP
             System.out.println("Khong du tien");
             else 
             {
-                System.out.println("Tien du: ");
-                System.out.print(money4-4);
+                System.out.print("Tien du: ");System.out.println(money4-4);
+                
+            
             }
             break;
-
             case 5:
             return;
             default:
-            System.out.println("Nhap sai vui long nhap lai");
+            System.out.println("Nhap sai ");
             break;
             
             }
@@ -191,7 +212,18 @@ class OOP
 
 public static void main(String[] args)
 {
-    
+    Cau1();
+    Cau2();
+    Cau3_F2C();
+    Cau3_C2F();
+    Cau5();
+    Cau6();
+    Cau8a();
+    Cau8b();
+    Cau8c();
+    Cau8d();
+    Cau8e();
+    Cau15();
 }
 
 }
