@@ -2,7 +2,7 @@
 #define Bai1_h
 #include <iostream>
 using namespace std;
-class Rectangle{
+class Rectangle {
 private:
     double length;
     double height;
@@ -16,7 +16,6 @@ public:
     void print();
 
     friend ostream& operator<<(ostream& out, const Rectangle& rec);
-    friend istream& operator>>(istream& in, const Rectangle& rec);
+    friend istream& operator>>(istream& in, Rectangle& rec);
 };
-int Rectangle::count = 0;
 #endif
