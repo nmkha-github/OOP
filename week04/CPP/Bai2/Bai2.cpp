@@ -31,7 +31,7 @@ Complex operator* (Complex const& C1, Complex const& C2)
 {
 	Complex ans;
 	ans.Re = C1.Re * C2.Re - C1.Im * C2.Im;
-	ans.Im = C1.Re * C2.Im - C1.Im * C2.Re;
+	ans.Im = C1.Re * C2.Im + C1.Im * C2.Re;
 	return ans;
 }
 
