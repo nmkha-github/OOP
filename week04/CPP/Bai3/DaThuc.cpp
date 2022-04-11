@@ -40,7 +40,11 @@ void DaThuc::XuatDaThuc() {
 		cout << pHead->LayHeSo() << "x^" << pHead->LaySoMu();
 		DonThuc* p = pHead->DonThucKeTiep();
 		while (p) {
-			p->XuatDonThuc();
+			if (p->LayHeSo() > 0)
+				cout << " + " << p->LayHeSo() << "x^" << p->LaySoMu();
+			else {
+				cout << " - " << -p->LayHeSo() << "x^" << p->LaySoMu();
+			}
 			p = p->DonThucKeTiep();
 		}
 		cout << endl;

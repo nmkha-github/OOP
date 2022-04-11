@@ -22,11 +22,8 @@ void DonThuc::NhapDonThuc() {
 
 void DonThuc::XuatDonThuc()
 {
-	if(HeSo > 0)
-		cout << " + " << HeSo << "x^" << SoMu;
-	else {
-		cout << " - " << -HeSo << "x^" << SoMu;
-	}
+	cout << HeSo << "x^" << SoMu;
+	cout << endl;
 }
 
 DonThuc*& DonThuc::DonThucKeTiep() {
@@ -52,6 +49,36 @@ void DonThuc::GanSoMu(int m) {
 
 double DonThuc::TinhGiaTri(double x) {
 	return HeSo * pow(x, SoMu);
+}
+
+DonThuc& DonThuc::operator+(DonThuc& p) {
+	if (SoMu != p.SoMu)
+		cout << "Khong cung bac\n";
+	else {
+		HeSo = HeSo + p.HeSo;
+	}
+	return *this;
+}
+
+DonThuc& DonThuc::operator-(DonThuc& p) {
+	if (SoMu != p.SoMu)
+		cout << "Khong cung bac\n";
+	else {
+		HeSo = HeSo - p.HeSo;
+	}
+	return *this;
+}
+
+DonThuc& DonThuc::operator*(DonThuc& p) {
+	HeSo = HeSo * p.HeSo;
+	SoMu = SoMu + p.SoMu;
+	return *this;
+}
+
+DonThuc& DonThuc::operator/(DonThuc& p) {
+	HeSo = HeSo / p.HeSo;
+	SoMu = SoMu - p.SoMu;
+	return *this;
 }
 
 DonThuc::~DonThuc() {

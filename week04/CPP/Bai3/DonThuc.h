@@ -19,6 +19,10 @@ public:
 	void GanHeSo(int h);
 	void GanSoMu(int m);
 	double TinhGiaTri(double x);
+	DonThuc& operator+(DonThuc& p);
+	DonThuc& operator-(DonThuc& p);
+	DonThuc& operator*(DonThuc& p);
+	DonThuc& operator/(DonThuc& p);
 	~DonThuc();
 };
 
