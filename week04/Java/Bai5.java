@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-public class Bai1 {
+public class Bai5
+{
     public static int[] input(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap so luong phan tu n = ");
@@ -16,20 +17,32 @@ public class Bai1 {
         for (int i = 0; i < arr.length; i++) System.out.print(arr[i] + " ");
         System.out.print("\n");
     }
-    public static int findMax(int arr[]){
-        int temp = arr[0];
-        for(int i = 0; i < arr.length; i++){
-            if (arr[i] > temp){
-                temp = arr[i];
-            }
-        }
-        return temp;
+
+    public static boolean isPrime(int a)
+    {
+    for(int i=2;i<a;i++)
+    {
+        if(a%i==0)
+        return false;
+    }
+    return true;
+    }
+
+    public static int Cau5(int a[])
+    {
+    int count =0;
+    for(int i=0;i<a.length;i++)
+    {
+        if(isPrime(a[i])==true)
+        count++;
+    }
+    return count;
     }
     public static void main(String[] args) {
-        int[] a = input();
+        int a[]= input();
         System.out.println("Mang da nhap:");
         output(a);
-        System.out.println("--------------------Cau1------------------");
-        System.out.println("Max = " + findMax(a));
+        System.out.println("--------------------Cau5------------------");
+        System.out.println("Co " + Cau5(a) + " so nguyen to trong mang.");
     }
 }

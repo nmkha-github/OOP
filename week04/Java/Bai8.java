@@ -1,4 +1,3 @@
-package Java;
 import java.math.BigDecimal;
 import java.util.Scanner;
 public class Bai8 {
@@ -15,6 +14,7 @@ public class Bai8 {
     }
     public static void output(BigDecimal arr[]){
         for (int i = 0; i < arr.length; i++) System.out.print(arr[i] + " ");
+        System.out.println("");
     }
     public static BigDecimal findMax(BigDecimal []arr){
         BigDecimal maxx = arr[0];
@@ -26,6 +26,7 @@ public class Bai8 {
         BigDecimal a[] = input();
         System.out.println("Mang da nhap:");
         output(a);
-        System.out.println("\nPhan tu lon nhat: " + findMax(a));
+        System.out.println("--------------------Cau8------------------");
+        System.out.println("Phan tu lon nhat: " + findMax(a));
     }
 }

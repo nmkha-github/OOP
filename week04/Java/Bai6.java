@@ -1,5 +1,3 @@
-package Java;
-
 import java.util.Scanner;
 
 public class Bai6{
@@ -16,6 +14,7 @@ public class Bai6{
     }
     public static void output(int arr[]){
         for (int i = 0; i < arr.length; i++) System.out.print(arr[i] + " ");
+        System.out.print("\n");
     }
     public static int find(int arr[], int k){
         for (int i = 0; i < arr.length; i++)
@@ -26,7 +25,8 @@ public class Bai6{
         int a[] = input();
         System.out.println("Mang da nhap: ");
         output(a);
-        System.out.print("\nNhap gia tri can tim: ");
+        System.out.println("--------------------Cau6------------------");
+        System.out.print("Nhap gia tri can tim: ");
         Scanner sc = new Scanner(System.in);
         int k = sc.nextInt();
         System.out.println("Vi tri gia tri " + k + " la: " + find(a, k));

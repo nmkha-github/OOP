@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-public class Bai1 {
+public class Bai4
+{
     public static int[] input(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap so luong phan tu n = ");
@@ -16,20 +17,26 @@ public class Bai1 {
         for (int i = 0; i < arr.length; i++) System.out.print(arr[i] + " ");
         System.out.print("\n");
     }
-    public static int findMax(int arr[]){
-        int temp = arr[0];
-        for(int i = 0; i < arr.length; i++){
-            if (arr[i] > temp){
-                temp = arr[i];
-            }
+
+    public static int Cau4(int a[],int x)
+    {
+        int count=0;
+        for(int i:a)
+        {
+        if(i==x)
+        count++;
         }
-        return temp;
+        return count;
     }
     public static void main(String[] args) {
-        int[] a = input();
+        int a[]= input();
         System.out.println("Mang da nhap:");
         output(a);
-        System.out.println("--------------------Cau1------------------");
-        System.out.println("Max = " + findMax(a));
+        System.out.print("Nhap gia tri can dem: ");
+        Scanner sc = new Scanner(System.in);
+        int x = sc.nextInt();
+        System.out.println("--------------------Cau4------------------");
+        System.out.println("So lan xuat hien cua " + x + ": ");
+        System.out.println(Cau4(a, x));
     }
 }
