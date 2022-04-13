@@ -1,3 +1,4 @@
+package week04.Java;
 import java.util.Scanner;
 
 public class Bai1 {
