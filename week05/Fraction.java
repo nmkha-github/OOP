@@ -11,7 +11,7 @@ public class Fraction {
         this.numberator = num;
         this.denominator = den;
         if (den == 0){
-            this.numberator = -(1 << 31) - 1;
+            this.numberator = -((1 << 31) - 1);
             this.denominator = 1;
         }
     }
