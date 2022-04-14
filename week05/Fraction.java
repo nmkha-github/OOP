@@ -10,6 +10,10 @@ public class Fraction {
     Fraction(int num, int den){
         this.numberator = num;
         this.denominator = den;
+        if (den == 0){
+            this.numberator = -(1 << 31) - 1;
+            this.denominator = 1;
+        }
     }
     Fraction(Fraction f){
         this.numberator = f.numberator;
@@ -75,7 +79,7 @@ public class Fraction {
             if (this.numberator < 0)
                 return (-this.numberator) + "";
         }
-        else if (this.numberator * this.denominator > 0)
+        else if ((long) this.numberator * (long) this.denominator > 0)
             return Math.abs(this.numberator) + "/" + Math.abs(this.denominator);
         return "-" + Math.abs(this.numberator) + "/" + Math.abs(this.denominator);
     }
