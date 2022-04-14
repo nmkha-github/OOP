@@ -31,7 +31,7 @@ public class Fraction {
         if (b == 0) return a;
         return Gcd(b, a % b);
     }
-    private void Simply(){
+    private void reducer(){
         int gcd = Gcd(this.numberator, this.denominator);
         this.setNumberator(this.numberator / gcd);
         this.setDenominator(this.denominator / gcd);
@@ -40,34 +40,31 @@ public class Fraction {
         Fraction result = new Fraction();
         result.numberator = this.numberator * f.denominator + f.numberator * this.denominator;
         result.denominator = this.denominator * f.denominator;
-        result.Simply();
+        result.reducer();
         return result;
     }
     public Fraction sub(Fraction f){
         Fraction result = new Fraction();
         result.numberator = this.numberator * f.denominator - f.numberator * this.denominator;
         result.denominator = this.denominator * f.denominator;
-        result.Simply();
+        result.reducer();
         return result;
     }
     public Fraction mul(Fraction f){
         Fraction result = new Fraction();
         result.numberator = this.numberator * f.numberator;
         result.denominator = this.denominator * f.denominator;
-        result.Simply();
+        result.reducer();
         return result;
     }
     public Fraction div(Fraction f){
         Fraction result = new Fraction();
         result.numberator = this.numberator * f.denominator;
         result.denominator = this.denominator * f.numberator;
-        result.Simply();
+        result.reducer();
         return result;
     }
-    public void reducer(){
-        this.numberator -= this.denominator;
-        this.Simply();
-    }
+    
     @Override
     public String toString(){
         if (this.denominator == 1)
@@ -103,10 +100,10 @@ public class Fraction {
         System.out.println(f1 + " - " + f2 + " = " + f1.sub(f2));
         System.out.println(f1 + " * " + f2 + " = " + f1.mul(f2));
         System.out.println(f1 + " / " + f2 + " = " + f1.div(f2));
-        System.out.print(f1 + "-- = ");
+        System.out.print("Rut gon phan so 1: " + f1 + " = ");
         f1.reducer();
         System.out.println(f1);
-        System.out.print(f2 + "-- = ");
+        System.out.print("Rut gon phan so 2: " + f2 + " = ");
         f2.reducer();
         System.out.println(f2);
     }
