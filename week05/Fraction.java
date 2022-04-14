@@ -21,6 +21,12 @@ public class Fraction {
     public void setDenominator(int x){
         this.denominator = x;
     }
+    public int getNumberator(){
+        return this.numberator;
+    }
+    public int getDenominator(){
+        return this.denominator;
+    }
     private int Gcd(int a, int b){
         if (b == 0) return a;
         return Gcd(b, a % b);
@@ -70,7 +76,7 @@ public class Fraction {
             if (this.numberator > 0)
                 return "-" + this.numberator;
             if (this.numberator < 0)
-                return this.numberator + "";
+                return (-this.numberator) + "";
         }
         else if (this.numberator * this.denominator > 0)
             return Math.abs(this.numberator) + "/" + Math.abs(this.denominator);
@@ -99,9 +105,9 @@ public class Fraction {
         System.out.println(f1 + " / " + f2 + " = " + f1.div(f2));
         System.out.print(f1 + "-- = ");
         f1.reducer();
-        system.out.println(f1);
+        System.out.println(f1);
         System.out.print(f2 + "-- = ");
-        f1.reducer();
-        system.out.println(f2);
+        f2.reducer();
+        System.out.println(f2);
     }
 }
