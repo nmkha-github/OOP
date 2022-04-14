@@ -96,10 +96,10 @@ public class Fraction {
         den = sc.nextInt();
         System.out.println("");
         Fraction f2 = new Fraction(numb, den);
-        System.out.println(f1 + " + " + f2 + " = " + f1.add(f2));
-        System.out.println(f1 + " - " + f2 + " = " + f1.sub(f2));
-        System.out.println(f1 + " * " + f2 + " = " + f1.mul(f2));
-        System.out.println(f1 + " / " + f2 + " = " + f1.div(f2));
+        System.out.println("(" + f1 + ") + (" + f2 + ") = " + f1.add(f2));
+        System.out.println("(" + f1 + ") - (" + f2 + ") = " + f1.sub(f2));
+        System.out.println("(" + f1 + ") * (" + f2 + ") = " + f1.mul(f2));
+        System.out.println("(" + f1 + ") / (" + f2 + ") = " + f1.div(f2));
         System.out.print("Rut gon phan so 1: " + f1 + " = ");
         f1.reducer();
         System.out.println(f1);
