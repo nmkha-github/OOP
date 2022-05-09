@@ -1,5 +1,4 @@
-package Lab6_Inheritance;
-
+package Bai2;
 public class Staff extends Person{
     private String school;
     private double pay;

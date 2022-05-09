@@ -1,8 +1,8 @@
-package Lab6_Inheritance;
+package Bai4;
 
-public class Circle {
-    protected double radius;
-    protected String color;
+public class Circle extends Shape{
+    private double radius;
+    private String color;
 
     public Circle() {
         this.radius = 1;
@@ -38,21 +38,24 @@ public class Circle {
     public double getArea() {
         return Math.PI * Math.pow(this.radius, 2);
     }
-
+    public double getPerimeter() {
+        return Math.PI * 2 * this.radius;
+    }
     @Override
     public String toString() {
-        return "Cirlce{radius =  " + this.radius + ", color = " + this.color + "}"; 
+        return "Cirlce{radius = " + this.radius + ", color = " + this.color + "}"; 
     }
 
     public static void main(String[] args){
-        Circle a = new Circle(3, "blue");
+        Circle a = new Circle(1, "blue");
         System.out.println(a.toString());
         System.out.println("Area = " + a.getArea());
-
+        System.out.println("Perimeter = " + a.getPerimeter());
         System.out.println("Change radius = 5 and color = yellow");
         a.setRadius(5);
         a.setColor("yellow");
-        System.out.println(a.toString());
+        System.out.println(a);
         System.out.println("Area = " + a.getArea());
+        System.out.println("Perimeter = " + a.getPerimeter());
     }
 }

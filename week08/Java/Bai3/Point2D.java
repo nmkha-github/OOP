@@ -1,3 +1,4 @@
+package Bai3;
 public class Point2D{
     protected float x, y;
     public Point2D(){
@@ -32,6 +33,7 @@ public class Point2D{
         return "(" + this.x + ", " + this.y + ")";
     }
     public static void main(String[] args) {
-        System.out.println("hello");
+        Point2D A = new Point2D(2, 3);
+        System.out.println(A);
     }
 }

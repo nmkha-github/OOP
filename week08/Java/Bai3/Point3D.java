@@ -1,3 +1,4 @@
+package Bai3;
 public class Point3D extends Point2D{
     protected float z;
     public Point3D(){

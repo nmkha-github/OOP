@@ -1,9 +1,7 @@
-package Lab6_Inheritance;
-
+package Bai2;
 public class Person {
     protected String name;
     protected String address;
-
     public Person(){
         this.name = "";
         this.address = "";
