@@ -1,10 +1,10 @@
-package Bai2;
-public class Student extends Person{
+
+public class Student extends Person {
     private String program;
     private int year;
     private double fee;
 
-    public Student(String name, String address, String program, int year, double fee){
+    public Student(String name, String address, String program, int year, double fee) {
         super(name, address);
         this.program = program;
         this.year = year;
@@ -19,7 +19,7 @@ public class Student extends Person{
         this.program = program;
     }
 
-    public int getYear(){
+    public int getYear() {
         return this.year;
     }
 
@@ -27,11 +27,11 @@ public class Student extends Person{
         this.year = year;
     }
 
-    public double getFee(){
+    public double getFee() {
         return this.fee;
     }
 
-    public void setFee(double fee){
+    public void setFee(double fee) {
         this.fee = fee;
     }
 
@@ -40,8 +40,9 @@ public class Student extends Person{
         return "Student{" + super.toString() + ", program = " + program + ", year = " + year + ", fee = " + fee + "}";
     }
 
-    public static void main(String[] args){
-        Student s = new Student("Tran Cong Thanh", "220 Nguyen Van Troi, p.1, q.Tan Binh, tp. HCM", "CLC", 2020 ,15000000);
+    public static void main(String[] args) {
+        Student s = new Student("Tran Cong Thanh", "220 Nguyen Van Troi, p.1, q.Tan Binh, tp. HCM", "CLC", 2020,
+                15000000);
         System.out.println(s.toString());
     }
 }

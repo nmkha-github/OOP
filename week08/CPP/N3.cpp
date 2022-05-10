@@ -88,7 +88,7 @@ public:
 	Rectangle() {
 		W = H = X.X = X.Y = 0;
 	}
-	Rectangle(double x, double y, double w, double h) {
+	Rectangle(int x, int y, double w, double h) {
 		this->X.X = x;
 		this->X.Y = y;
 		this->W = w;
@@ -145,11 +145,11 @@ public:
 		this->sz = 0;
 		this->Children = NULL;
 	}
-	ComplexShape(int sz, Shape* a) {
+	ComplexShape(int sz, Shape* a[]) {
 		this->sz = sz;
 		this->Children = new Shape * [sz];
 		for (int i = 0; i < this->sz; i++)
-			this->Children[i] = &(a[i]);
+			this->Children[i] = a[i];
 	}
 	//Destructors
 	~ComplexShape() {
@@ -187,6 +187,7 @@ public:
 		this->sz++;
 		Shape** temp = new Shape* [this->sz];
 		for (int i = 0; i < this->sz - 1; i++) {
+			delete[] temp[i];
 			temp[i] = this->Children[i];
 		}
 		temp[this->sz - 1] = x;

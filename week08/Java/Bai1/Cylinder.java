@@ -1,45 +1,45 @@
-package Bai1;
-public class Cylinder extends Circle{
+
+public class Cylinder extends Circle {
     private double height;
 
-    public Cylinder(){
+    public Cylinder() {
         super();
         this.height = 1;
     }
-    
-    public Cylinder(double radius){
+
+    public Cylinder(double radius) {
         super(radius);
         this.height = 1;
     }
 
-    public Cylinder(double radius, double height){
+    public Cylinder(double radius, double height) {
         super(radius);
         this.height = height;
     }
 
-    public Cylinder(double radius, double height, String color){
+    public Cylinder(double radius, double height, String color) {
         super(radius, color);
         this.height = height;
     }
 
-    public double getHeight(){
+    public double getHeight() {
         return this.height;
     }
 
-    public void setHeight(double height){
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public double getVolume(){
-        return super.getArea()*this.height;
+    public double getVolume() {
+        return super.getArea() * this.height;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Cylinder{" + super.toString() + ", height: " + height + "}";
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Cylinder a = new Cylinder();
         System.out.println(a.toString());
         System.out.println("Volume = " + a.getVolume());
@@ -49,4 +49,3 @@ public class Cylinder extends Circle{
         System.out.println("Volume = " + b.getVolume());
     }
 }
-
