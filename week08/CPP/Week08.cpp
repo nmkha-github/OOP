@@ -20,7 +20,10 @@ public:
 	// other methods, Example: input(); print();
 	virtual void input() = 0;
 	virtual void print() = 0;
-	virtual int isShape() = 0; // kiểm tra thuộc loại hình nào(0. Hình tròn		1. Hình chữ nhật)
+	virtual int isShape() // kiểm tra thuộc loại hình nào(0. Hình tròn		1. Hình chữ nhật)
+	{
+		return -1;
+	}
 };
 // Lớp Circle
 class Circle : public Shape {
@@ -129,7 +132,7 @@ public:
 	// Constructors
 	ComplexShape() {
 		this->sz = 0;
-		this-> Children = new Shape * [sz];
+		this->Children = new Shape * [sz];
 	}
 	//Destructors
 	~ComplexShape() {
@@ -137,7 +140,7 @@ public:
 		this->Children = NULL;
 	}
 	// Copy Constructors
-	ComplexShape(ComplexShape &a) {
+	ComplexShape(ComplexShape& a) {
 		this->sz = a.sz;
 		this->Children = a.Children;
 	}
@@ -153,24 +156,23 @@ public:
 		return false;
 	}
 	// Overriding base class's Clone method
-	Shape* Clone()  {
+	Shape* Clone() {
 		ComplexShape* p = new ComplexShape;
 		if (p == NULL) return NULL;
 		p->sz = sz;
 		p->Children = Children;
 		return p;
-		
+
 	}
 	//other methods
 	void addShape(Shape* x) {
-		ComplexShape a = new ComplexShape[sz + 1];
-		for (int i = 0; i < sz; i++) {
-			a.Children[i] = this->Children[i];
-		}
-		a.Children[sz] = x;
 		this->sz++;
-		delete[] this->Children;
-		this->Children = a.Children;
+		ComplexShape* a = new ComplexShape[sz];
+		for (int i = 0; i < sz - 1; i++) {
+			a->Children[i] = this->Children[i];
+		}
+		a->Children[sz - 1] = x;
+		this->Children = a->Children;
 	}
 
 	void input()
@@ -178,9 +180,10 @@ public:
 		int choice;
 		cout << "1. Nhap hinh tron\n";
 		cout << "2. Nhap hinh chu nhat\n";
-		cout << "0. Thoat\n"
+		cout << "0. Thoat\n";
 		Shape* x; // khai báo hình
 		do {
+			cout << "Nhap lua chon: ";
 			cin >> choice;
 			if (choice == 0) {
 				break;
@@ -200,7 +203,7 @@ public:
 			// thêm hình vừa nhập vào mảng <Shape*>
 			addShape(x);
 		} while (true);
-		
+
 	}
 
 	void print()
@@ -208,21 +211,24 @@ public:
 		cout << "So hinh: " << sz << endl;
 		for (int i = 0; i < sz; i++)
 		{
-			cout << "Hinh thu " << i + 1 << " :" << Children[i]->print() << endl;
+			cout << "Hinh thu " << i + 1 << " :";
+			Children[i]->print();
+			cout << endl;
 		}
 	}
 
 	void classification() {
+		cout << "============ PHAN LOAI HINH ===============\n";
 		int Cir = 0;
 		int Rec = 0;
 		for (int i = 0; i < sz; i++) {
 			if (Children[i]->isShape() == 0)
 				Cir++;
-			else
+			if (Children[i]->isShape() == 1)
 				Rec++;
 		}
 		cout << "So luong hinh tron: " << Cir << endl;
-		cout << "So luong hình chu nhat: " << Rec << endl;
+		cout << "So luong hinh chu nhat: " << Rec << endl;
 	}
 };
 
