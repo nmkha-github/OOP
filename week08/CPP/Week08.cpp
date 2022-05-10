@@ -145,11 +145,11 @@ public:
 		this->sz = 0;
 		this->Children = NULL;
 	}
-	ComplexShape(int sz, Shape* a[]) {
+	ComplexShape(int sz, Shape* a) {
 		this->sz = sz;
 		this->Children = new Shape * [sz];
 		for (int i = 0; i < this->sz; i++)
-			this->Children[i] = a[i];
+			this->Children[i] = &(a[i]);
 	}
 	//Destructors
 	~ComplexShape() {
