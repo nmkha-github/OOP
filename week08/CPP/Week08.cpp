@@ -88,7 +88,7 @@ public:
 	Rectangle() {
 		W = H = X.X = X.Y = 0;
 	}
-	Rectangle(int x, int y, double w, double h) {
+	Rectangle(double x, double y, double w, double h) {
 		this->X.X = x;
 		this->X.Y = y;
 		this->W = w;
