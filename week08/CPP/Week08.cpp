@@ -20,6 +20,7 @@ public:
 	// other methods, Example: input(); print();
 	virtual void input() = 0;
 	virtual void print() = 0;
+	virtual int isShape() = 0; // kiểm tra thuộc loại hình nào(0. Hình tròn		1. Hình chữ nhật)
 };
 // Lớp Circle
 class Circle : public Shape {
@@ -64,6 +65,9 @@ public:
 	}
 	void print() {
 		std::cout << "Hinh tron tam (" << this->C.X << ',' << this->C.Y << "), ban kinh R = " << this->R;
+	}
+	int isShape() {
+		return 0;
 	}
 };
 // Lớp hình chu nhat
@@ -110,6 +114,9 @@ public:
 		std::cout << "Hinh chu nhat co goc trai tren (" << this->X.X
 			<< ',' << this->X.Y << "), chieu rong W = " << this->W
 			<< ", chieu cao H = " << this->H;
+	}
+	int isShape() {
+		return 1;
 	}
 };
 // Lớp ComplexShape
@@ -205,10 +212,24 @@ public:
 		}
 	}
 
-
+	void classification() {
+		int Cir = 0;
+		int Rec = 0;
+		for (int i = 0; i < sz; i++) {
+			if (Children[i]->isShape() == 0)
+				Cir++;
+			else
+				Rec++;
+		}
+		cout << "So luong hinh tron: " << Cir << endl;
+		cout << "So luong hình chu nhat: " << Rec << endl;
+	}
 };
 
 int main()
 {
-	
+	ComplexShape C;
+	C.input();
+	C.print();
+	C.classification();
 }
