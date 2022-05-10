@@ -135,7 +135,6 @@ public:
 		this->Children = a.Children;
 	}
 
-
 	// Overriding base class's IsSelected method
 
 	//chua lam dc
@@ -164,31 +163,25 @@ public:
 		cin >> this->sz;
 		
 		int choice;
-		for (int i = 0; i < sz; i++)
-		{
-			cout << "Chon 1 de nhap hinh tron" << endl;
-			cout << "Chon 2 de nhap hinh chu nhat" << endl;
-			
+		cout << "1. Nhap hinh tron\n";
+		cout << "2. Nhap hinh chu nhat\n";
+		Shape* x; // khai báo hình
+		do {
 			cin >> choice;
 			if (choice == 1)
 			{
-				Children[i] = new Circle[1];
-				Circle a;
-				a.input();
-				Children[i] = &a;
-				
-				
+				x = new Circle;
+				x->input();
 			}
 			if (choice == 2)
 			{
-				Children[i] = new Rectangle[1];
-				Rectangle b;
-				b.input();
-				Children[i] = &b;
-				
+				x = new Rectangle;
+				x->input();
 			}
-			
-		}
+		} while (choice != 1 && choice != 2);
+		// thêm hình vừa nhập vào mảng <Shape*>
+		Children[sz] = x;
+		sz++;
 	}
 	//chua lam dc
 	void print()
@@ -197,10 +190,10 @@ public:
 		for (int i = 0; i < sz; i++)
 		{
 			cout << "Hinh thu " << i + 1 << " :";
-			
 		}
 	}
 };
+
 int main()
 {
 	
