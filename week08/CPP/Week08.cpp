@@ -153,15 +153,14 @@ public:
 	}
 	//Destructors
 	~ComplexShape() {
-		for (int i = 0; i < this->sz; i++)
-			delete this->Children[i];
 		delete[] this->Children;
 		this->sz = 0;
 	}
 	// Copy Constructors
-	ComplexShape(ComplexShape& a) {
+	ComplexShape(const ComplexShape& a) {
 		this->sz = a.sz;
-		this->Children = a.Children;
+		for (int i=0; i<sz; i++)
+			this->Children[i] = a.Children[i];
 	}
 
 	// Overriding base class's IsSelected method
@@ -186,15 +185,19 @@ public:
 	//other methods
 	void addShape(Shape* x) {
 		this->sz++;
-		for (int i = 0; i < this->sz - 1; i++)
-			delete this->Children[i];
-		this->Children = new Shape * [this->sz];
-		this->Children[sz - 1] = x;
+		Shape** temp = new Shape* [this->sz];
+		for (int i = 0; i < this->sz - 1; i++) {
+			delete[] temp[i];
+			temp[i] = this->Children[i];
+		}
+		temp[this->sz - 1] = x;
+		this->Children = temp;
 	}
 
 	void input()
 	{
 		int choice;
+		cout << "Nhap lop ComplexShape gom nhieu hinh:\n";
 		cout << "1. Nhap hinh tron\n";
 		cout << "2. Nhap hinh chu nhat\n";
 		cout << "0. In ket qua\n";
@@ -228,7 +231,7 @@ public:
 		cout << "So hinh: " << sz << endl;
 		for (int i = 0; i < sz; i++)
 		{
-			cout << "Hinh thu " << i + 1 << " :";
+			cout << "Hinh thu " << i + 1 << ": ";
 			this->Children[i]->print();
 			cout << endl;
 		}
