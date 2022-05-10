@@ -187,7 +187,6 @@ public:
 		this->sz++;
 		Shape** temp = new Shape* [this->sz];
 		for (int i = 0; i < this->sz - 1; i++) {
-			delete[] temp[i];
 			temp[i] = this->Children[i];
 		}
 		temp[this->sz - 1] = x;
