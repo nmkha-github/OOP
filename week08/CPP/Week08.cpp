@@ -159,29 +159,33 @@ public:
 	//other methods
 	void input()
 	{
-		cout << "Nhap size: ";
-		cin >> this->sz;
-		
 		int choice;
 		cout << "1. Nhap hinh tron\n";
 		cout << "2. Nhap hinh chu nhat\n";
+		cout << "0. Thoat\n"
 		Shape* x; // khai báo hình
 		do {
 			cin >> choice;
-			if (choice == 1)
+			if (choice == 0) {
+				break;
+			}
+			else if (choice == 1)
 			{
 				x = new Circle;
 				x->input();
 			}
-			if (choice == 2)
+			else if (choice == 2)
 			{
 				x = new Rectangle;
 				x->input();
 			}
+			else
+				continue;
+			// thêm hình vừa nhập vào mảng <Shape*>
+			Children[sz] = x;
+			sz++;
 		} while (choice != 1 && choice != 2);
-		// thêm hình vừa nhập vào mảng <Shape*>
-		Children[sz] = x;
-		sz++;
+		
 	}
 	//chua lam dc
 	void print()
