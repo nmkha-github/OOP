@@ -136,11 +136,9 @@ public:
 	}
 
 	// Overriding base class's IsSelected method
-
-	//chua lam dc
 	bool IsSelected(Point p)
 	{
-		for (int i = 0; i < sz - 1; i++)
+		for (int i = 0; i < sz; i++)
 		{
 			if (Children[i]->IsSelected(p))
 				return true;
@@ -157,6 +155,17 @@ public:
 		
 	}
 	//other methods
+	void addShape(Shape* x) {
+		ComplexShape a = new ComplexShape[sz + 1];
+		for (int i = 0; i < sz; i++) {
+			a.Children[i] = this->Children[i];
+		}
+		a.Children[sz] = x;
+		this->sz++;
+		delete[] this->Children;
+		this->Children = a.Children;
+	}
+
 	void input()
 	{
 		int choice;
@@ -182,20 +191,21 @@ public:
 			else
 				continue;
 			// thêm hình vừa nhập vào mảng <Shape*>
-			Children[sz] = x;
-			sz++;
-		} while (choice != 1 && choice != 2);
+			addShape(x);
+		} while (true);
 		
 	}
-	//chua lam dc
+
 	void print()
 	{
 		cout << "So hinh: " << sz << endl;
 		for (int i = 0; i < sz; i++)
 		{
-			cout << "Hinh thu " << i + 1 << " :";
+			cout << "Hinh thu " << i + 1 << " :" << Children[i]->print() << endl;
 		}
 	}
+
+
 };
 
 int main()
