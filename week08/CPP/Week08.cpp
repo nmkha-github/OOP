@@ -1,6 +1,3 @@
-﻿// Week08.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -125,18 +122,86 @@ public:
 	// Constructors
 	ComplexShape() {
 		this->sz = 0;
-		this->Children = NULL;
+		this-> Children = new Shape * [sz];
 	}
 	//Destructors
+	~ComplexShape() {
+		this->sz = 0;
+		this->Children = NULL;
+	}
 	// Copy Constructors
-	
+	ComplexShape(ComplexShape &a) {
+		this->sz = a.sz;
+		this->Children = a.Children;
+	}
+
+
 	// Overriding base class's IsSelected method
-	bool IsSelected(Point);
+
+	//chua lam dc
+	bool IsSelected(Point p)
+	{
+		for (int i = 0; i < sz - 1; i++)
+		{
+			if (Children[i]->IsSelected(p))
+				return true;
+		}
+		return false;
+	}
 	// Overriding base class's Clone method
-	Shape* Clone();
+	Shape* Clone()  {
+		ComplexShape* p = new ComplexShape;
+		if (p == NULL) return NULL;
+		p->sz = sz;
+		p->Children = Children;
+		return p;
+		
+	}
 	//other methods
+	void input()
+	{
+		cout << "Nhap size: ";
+		cin >> this->sz;
+		
+		int choice;
+		for (int i = 0; i < sz; i++)
+		{
+			cout << "Chon 1 de nhap hinh tron" << endl;
+			cout << "Chon 2 de nhap hinh chu nhat" << endl;
+			
+			cin >> choice;
+			if (choice == 1)
+			{
+				Children[i] = new Circle[1];
+				Circle a;
+				a.input();
+				Children[i] = &a;
+				
+				
+			}
+			if (choice == 2)
+			{
+				Children[i] = new Rectangle[1];
+				Rectangle b;
+				b.input();
+				Children[i] = &b;
+				
+			}
+			
+		}
+	}
+	//chua lam dc
+	void print()
+	{
+		cout << "So hinh: " << sz << endl;
+		for (int i = 0; i < sz; i++)
+		{
+			cout << "Hinh thu " << i + 1 << " :";
+			
+		}
+	}
 };
 int main()
 {
-
+	
 }
