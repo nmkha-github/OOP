@@ -37,6 +37,11 @@ public:
 		this->C.Y = 0;
 		this->R = 0;
 	}
+	Circle(double x, double y, double r) {
+		this->C.X = x;
+		this->C.Y = y;
+		this->R = r;
+	}
 	// Detructors
 	~Circle() {
 		this->C.X = 0;
@@ -82,6 +87,12 @@ public:
 	//Constructors
 	Rectangle() {
 		W = H = X.X = X.Y = 0;
+	}
+	Rectangle(int x, int y, double w, double h) {
+		this->X.X = x;
+		this->X.Y = y;
+		this->W = w;
+		this->H = h;
 	}
 	// Destructors
 	~Rectangle() {
@@ -132,12 +143,20 @@ public:
 	// Constructors
 	ComplexShape() {
 		this->sz = 0;
+		this->Children = NULL;
+	}
+	ComplexShape(int sz, Shape* a[]) {
+		this->sz = sz;
 		this->Children = new Shape * [sz];
+		for (int i = 0; i < this->sz; i++)
+			this->Children[i] = a[i];
 	}
 	//Destructors
 	~ComplexShape() {
+		for (int i = 0; i < this->sz; i++)
+			delete this->Children[i];
+		delete[] this->Children;
 		this->sz = 0;
-		this->Children = NULL;
 	}
 	// Copy Constructors
 	ComplexShape(ComplexShape& a) {
@@ -167,12 +186,10 @@ public:
 	//other methods
 	void addShape(Shape* x) {
 		this->sz++;
-		ComplexShape* a = new ComplexShape[sz];
-		for (int i = 0; i < sz - 1; i++) {
-			a->Children[i] = this->Children[i];
-		}
-		a->Children[sz - 1] = x;
-		this->Children = a->Children;
+		for (int i = 0; i < this->sz - 1; i++)
+			delete this->Children[i];
+		this->Children = new Shape * [this->sz];
+		this->Children[sz - 1] = x;
 	}
 
 	void input()
@@ -180,7 +197,7 @@ public:
 		int choice;
 		cout << "1. Nhap hinh tron\n";
 		cout << "2. Nhap hinh chu nhat\n";
-		cout << "0. Thoat\n";
+		cout << "0. In ket qua\n";
 		Shape* x; // khai báo hình
 		do {
 			cout << "Nhap lua chon: ";
@@ -212,7 +229,7 @@ public:
 		for (int i = 0; i < sz; i++)
 		{
 			cout << "Hinh thu " << i + 1 << " :";
-			Children[i]->print();
+			this->Children[i]->print();
 			cout << endl;
 		}
 	}
