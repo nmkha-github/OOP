@@ -12,11 +12,11 @@ public:
 	double Marks[3];
 
 	SinhVien();
-	SinhVien(char* hoten, char* mssv, char* ngSinh);
+	SinhVien(char* hoten, char* mssv, char* ngSinh, double bt, double gk, double ck);
 	~SinhVien();
 
 	SinhVien(SinhVien& a);
-	SinhVien& operator=(SinhVien& a);
+	void operator=(SinhVien& a);
 	void xuat();
 	void nhap();
 	double tinhDiem();
@@ -31,13 +31,16 @@ SinhVien::SinhVien() {
 	Marks[2] = 0;
 }
 
-SinhVien::SinhVien(char* hoten, char* mssv, char* ngSinh) {
+SinhVien::SinhVien(char* hoten, char* mssv, char* ngSinh, double bt, double gk, double ck) {
 	this->hoTen = new char[strlen(hoten)];
 	strcpy(this->hoTen, hoten);
 	this->maSo = new char[strlen(mssv)];
 	strcpy(this->maSo, mssv);
 	this->ngSinh = new char[strlen(ngSinh)];
 	strcpy(this->ngSinh, ngSinh);
+	Marks[0] = bt;
+	Marks[1] = gk;
+	Marks[2] = ck;
 }
 
 SinhVien::~SinhVien() {
@@ -58,18 +61,16 @@ SinhVien::SinhVien(SinhVien& a) {
 	this->Marks[2] = a.Marks[2];
 }
 
-SinhVien& SinhVien::operator=(SinhVien& a) {
-	SinhVien b;
-	b.hoTen = new char[strlen(a.hoTen)];
-	b.maSo = new char[strlen(a.maSo)];
-	b.ngSinh = new char[strlen(a.ngSinh)];
-	strcpy(b.hoTen, a.hoTen);
-	strcpy(b.maSo, a.maSo);
-	strcpy(b.ngSinh, a.ngSinh);
-	b.Marks[0] = a.Marks[0];
-	b.Marks[1] = a.Marks[1];
-	b.Marks[2] = a.Marks[2];
-	return b;
+void SinhVien::operator=(SinhVien& a) {
+	hoTen = new char[strlen(a.hoTen)];
+	maSo = new char[strlen(a.maSo)];
+	ngSinh = new char[strlen(a.ngSinh)];
+	strcpy(hoTen, a.hoTen);
+	strcpy(maSo, a.maSo);
+	strcpy(ngSinh, a.ngSinh);
+	Marks[0] = a.Marks[0];
+	Marks[1] = a.Marks[1];
+	Marks[2] = a.Marks[2];
 }
 
 void xuatChuoi(char* a) {
@@ -160,7 +161,6 @@ void QuanLySinhVien::themSV(const SinhVien& a) {
 		dssv[0].Marks[2] = a.Marks[2];
 	}
 	else {
-		this->dssv = new SinhVien[size];
 		SinhVien* ds = new SinhVien[size + 1];
 		for (int i = 0; i < size; i++) {
 			ds[i] = dssv[i];
@@ -169,7 +169,7 @@ void QuanLySinhVien::themSV(const SinhVien& a) {
 
 		size++;
 		this->dssv = new SinhVien[size];
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < size - 1; i++) {
 			dssv[i] = ds[i];
 		}
 		dssv[size - 1].hoTen = new char[strlen(a.hoTen)];
@@ -250,6 +250,7 @@ void QuanLySinhVien::docDS(char* fileName)
 	ifstream f;
 	f.open(fileName);
 	f >> size;
+	dssv = new SinhVien[size];
 	for (int i = 0; i < size; i++) {
 		f.getline(dssv[i].hoTen, 50);
 		f.getline(dssv[i].maSo, 50);
@@ -266,15 +267,17 @@ int main() {
 	SinhVien a;
 	a.nhap();
 	a.xuat();
+	SinhVien b((char*)"Pham Hong Anh", (char*)"20120252", (char*)"05/04/2002", 6, 7, 8);
 	QuanLySinhVien ds;
 	ds.themSV(a);
+	ds.themSV(b);
 	ds.xuatDS();
 
-	cout << "\nInput: tu file\n";
+	/*cout << "\nInput: tu file\n";
 	char* mssv = (char*)"20120502";
 	ds.docDS((char*)"input.txt");
 	ds.xuatDS();
-	ds.ghiDS((char*)"output.txt");
+	ds.ghiDS((char*)"output.txt");*/
 
 	return 0;
 }
