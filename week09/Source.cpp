@@ -62,12 +62,21 @@ SinhVien::SinhVien(SinhVien& a) {
 }
 
 void SinhVien::operator=(SinhVien& a) {
-	hoTen = new char[strlen(a.hoTen)];
-	maSo = new char[strlen(a.maSo)];
-	ngSinh = new char[strlen(a.ngSinh)];
-	strcpy(hoTen, a.hoTen);
-	strcpy(maSo, a.maSo);
-	strcpy(ngSinh, a.ngSinh);
+	if (a.hoTen != NULL)
+	{
+		hoTen = new char[strlen(a.hoTen)];
+		strcpy(hoTen, a.hoTen);
+	}
+	if (a.maSo != NULL)
+	{
+		maSo = new char[strlen(a.maSo)];
+		strcpy(maSo, a.maSo);
+	}
+	if (a.ngSinh != NULL)
+	{
+		ngSinh = new char[strlen(a.ngSinh)];
+		strcpy(ngSinh, a.ngSinh);
+	}
 	Marks[0] = a.Marks[0];
 	Marks[1] = a.Marks[1];
 	Marks[2] = a.Marks[2];
@@ -170,7 +179,7 @@ void QuanLySinhVien::themSV(const SinhVien& a) {
 
 		size++;
 		this->dssv = new SinhVien[size];
-		for (int i = 0; i < size-1; i++) {
+		for (int i = 0; i < size - 1; i++) {
 			dssv[i] = ds[i];
 		}
 		dssv[size - 1].hoTen = new char[strlen(a.hoTen)];
@@ -268,16 +277,16 @@ void QuanLySinhVien::XepLoaiSinhVienVaXuat()
 	for (int i = 0; i < size - 1; i++)
 	{
 		if (dssv[i].tinhDiem() >= 9)
-			a[i]= 'XSac';
+			a[i] = 'XSac';
 		if (dssv[i].tinhDiem() >= 8)
 			a[i] = 'Gioi';
 		if (dssv[i].tinhDiem() >= 7)
 			a[i] = 'Kha';
 		if (dssv[i].tinhDiem() >= 6)
-			a[i] = 'TB' ;
-		else 
+			a[i] = 'TB';
+		else
 			a[i] = 'Kem';
-		
+
 	}
 
 	for (int j = 0; j < size - 1; j++)
@@ -291,7 +300,7 @@ int main() {
 	SinhVien a;
 	a.nhap();
 	a.xuat();
-	SinhVien b((char*)"Pham Hong Anh", (char*)"20120252", (char*)"05/04/2002", 6,7,8);
+	SinhVien b((char*)"Pham Hong Anh", (char*)"20120252", (char*)"05/04/2002", 6, 7, 8);
 	QuanLySinhVien ds;
 	ds.themSV(a);
 	ds.themSV(b);
