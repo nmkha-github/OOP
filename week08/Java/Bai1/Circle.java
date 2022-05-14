@@ -1,5 +1,5 @@
-package Bai1;
-public class Circle{
+
+public class Circle {
     protected double radius;
     protected String color;
 
@@ -33,17 +33,17 @@ public class Circle{
     public void setColor(String color) {
         this.color = color;
     }
-    
+
     public double getArea() {
         return Math.PI * Math.pow(this.radius, 2);
     }
 
     @Override
     public String toString() {
-        return "Cirlce{radius = " + this.radius + ", color = " + this.color + "}"; 
+        return "Cirlce{radius = " + this.radius + ", color = " + this.color + "}";
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Circle a = new Circle(3, "blue");
         System.out.println(a.toString());
         System.out.println("Area = " + a.getArea());

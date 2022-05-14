@@ -1,13 +1,14 @@
-package Bai2;
+
 public class Person {
     protected String name;
     protected String address;
-    public Person(){
+
+    public Person() {
         this.name = "";
         this.address = "";
     }
 
-    public Person(String name, String address){
+    public Person(String name, String address) {
         this.name = name;
         this.address = address;
     }
@@ -20,12 +21,12 @@ public class Person {
         return this.address;
     }
 
-    public void setAddress(String address){
+    public void setAddress(String address) {
         this.address = address;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Person{name = " + name + ", address = " + address + "}";
     }
 }
