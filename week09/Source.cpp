@@ -135,6 +135,7 @@ public:
 	void xuatDS();
 	void ghiDS(char* fileName);
 	void docDS(char* fileName);
+	void XepLoaiSinhVienVaXuat();
 };
 
 QuanLySinhVien::QuanLySinhVien() {
@@ -260,6 +261,29 @@ void QuanLySinhVien::docDS(char* fileName)
 		f >> dssv[i].Marks[2];
 	}
 	f.close();
+}
+void QuanLySinhVien::XepLoaiSinhVienVaXuat()
+{
+	char* a = new char[size];
+	for (int i = 0; i < size - 1; i++)
+	{
+		if (dssv[i].tinhDiem() >= 9)
+			a[i]= 'XSac';
+		if (dssv[i].tinhDiem() >= 8)
+			a[i] = 'Gioi';
+		if (dssv[i].tinhDiem() >= 7)
+			a[i] = 'Kha';
+		if (dssv[i].tinhDiem() >= 6)
+			a[i] = 'TB' ;
+		else 
+			a[i] = 'Kem';
+		
+	}
+
+	for (int j = 0; j < size - 1; j++)
+	{
+		cout << *(dssv + j)->hoTen << ": " << a[j] << endl;
+	}
 }
 
 int main() {
