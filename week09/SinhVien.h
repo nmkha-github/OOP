@@ -5,18 +5,19 @@ using namespace std;
 
 class SinhVien
 {
-private:
+public:
 	char* hoTen;
 	char* maSo;
 	char* ngSinh;
-public:
+	double Marks[3];
+
 	SinhVien();
 	SinhVien(char* hoten, char* mssv, char* ngSinh);
 	~SinhVien();
 
 	SinhVien(SinhVien* a);
 	SinhVien* operator=(SinhVien* a);
-	void nhap();
 	void xuat();
+	double tinhDiem();
 };
 
