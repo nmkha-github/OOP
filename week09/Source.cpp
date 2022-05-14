@@ -169,7 +169,7 @@ void QuanLySinhVien::themSV(const SinhVien& a) {
 
 		size++;
 		this->dssv = new SinhVien[size];
-		for (int i = 0; i < size - 1; i++) {
+		for (int i = 0; i < size-1; i++) {
 			dssv[i] = ds[i];
 		}
 		dssv[size - 1].hoTen = new char[strlen(a.hoTen)];
@@ -267,7 +267,7 @@ int main() {
 	SinhVien a;
 	a.nhap();
 	a.xuat();
-	SinhVien b((char*)"Pham Hong Anh", (char*)"20120252", (char*)"05/04/2002", 6, 7, 8);
+	SinhVien b((char*)"Pham Hong Anh", (char*)"20120252", (char*)"05/04/2002", 6,7,8);
 	QuanLySinhVien ds;
 	ds.themSV(a);
 	ds.themSV(b);
