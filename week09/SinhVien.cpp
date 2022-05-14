@@ -90,7 +90,7 @@ void SinhVien::xuat() {
 	xuatChuoi(this->maSo);
 	cout << "\nNgay sinh: ";
 	xuatChuoi(this->ngSinh);
-	cout << "\nstdAvg = " << tinhDiem() << endl;
+	cout << "\nAvg = " << tinhDiem() << endl;
 }
 
 double SinhVien::tinhDiem() {

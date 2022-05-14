@@ -6,5 +6,8 @@ int main() {
 	a.xuat();
 	QuanLySinhVien ds;
 	ds.themSV(a);
+	char* mssv = (char*) "20120502";
+	ds.docDS((char*)"output.txt");
+	ds.xuat();
 	return 0;
 }

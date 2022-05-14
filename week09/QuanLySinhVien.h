@@ -9,7 +9,9 @@ private:
 public:
 	QuanLySinhVien();
 	~QuanLySinhVien();
-	void themSV(SinhVien a);
+	void themSV(const SinhVien& a);
 	void xoaSV(char* mssv);
+	void ghiDS(char* fileName);
+	void docDS(char* fileName);
 };
 
