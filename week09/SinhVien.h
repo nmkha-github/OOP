@@ -15,9 +15,10 @@ public:
 	SinhVien(char* hoten, char* mssv, char* ngSinh);
 	~SinhVien();
 
-	SinhVien(SinhVien* a);
-	SinhVien* operator=(SinhVien* a);
+	SinhVien(SinhVien& a);
+	SinhVien& operator=(SinhVien& a);
 	void xuat();
+	void nhap();
 	double tinhDiem();
 };
 

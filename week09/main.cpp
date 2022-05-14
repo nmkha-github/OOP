@@ -2,8 +2,9 @@
 #include "QuanLySinhVien.h"
 int main() {
 	SinhVien a;
+	a.nhap();
 	a.xuat();
-	QuanLySinhVien ql;
-	ql.themSV(&a);
+	QuanLySinhVien ds;
+	ds.themSV(a);
 	return 0;
 }

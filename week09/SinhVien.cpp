@@ -1,6 +1,62 @@
 #include "SinhVien.h"
 
 SinhVien::SinhVien() {
+	this->hoTen = NULL;
+	this->maSo = NULL;
+	this->ngSinh = NULL;
+	Marks[0] = 0;
+	Marks[1] = 0;
+	Marks[2] = 0;
+}
+
+SinhVien::SinhVien(char* hoten, char* mssv, char* ngSinh) {
+	this->hoTen = new char[strlen(hoten)];
+	strcpy(this->hoTen, hoten);
+	this->maSo = new char[strlen(mssv)];
+	strcpy(this->maSo, mssv);
+	this->ngSinh = new char[strlen(ngSinh)];
+	strcpy(this->ngSinh, ngSinh);
+}
+
+SinhVien::~SinhVien() {
+	this->hoTen = NULL;
+	this->maSo = NULL;
+	this->ngSinh = NULL;
+}
+
+SinhVien::SinhVien(SinhVien& a) {
+	this->hoTen = new char[strlen(a.hoTen)];
+	strcpy(this->hoTen, a.hoTen);
+	this->maSo = new char[strlen(a.maSo)];
+	strcpy(this->maSo, a.maSo);
+	this->ngSinh = new char[strlen(a.ngSinh)];
+	strcpy(this->ngSinh, a.ngSinh);
+	this->Marks[0] = a.Marks[0];
+	this->Marks[1] = a.Marks[1];
+	this->Marks[2] = a.Marks[2];
+}
+
+SinhVien& SinhVien::operator=(SinhVien& a) {
+	SinhVien b;
+	b.hoTen = new char[strlen(a.hoTen)];
+	b.maSo = new char[strlen(a.maSo)];
+	b.ngSinh = new char[strlen(a.ngSinh)];
+	strcpy(b.hoTen, a.hoTen);
+	strcpy(b.maSo, a.maSo);
+	strcpy(b.ngSinh, a.ngSinh);
+	b.Marks[0] = a.Marks[0];
+	b.Marks[1] = a.Marks[1];
+	b.Marks[2] = a.Marks[2];
+	return b;
+}
+
+void xuatChuoi(char* a) {
+	for (int i = 0; i < strlen(a); i++) {
+		cout << a[i];
+	}
+}
+
+void SinhVien::nhap() {
 	char ten[50];
 	cout << "Ho ten: ";
 	cin.getline(ten, 49);
@@ -27,43 +83,6 @@ SinhVien::SinhVien() {
 	cin >> Marks[2];
 }
 
-SinhVien::SinhVien(char* hoten, char* mssv, char* ngSinh) {
-	this->hoTen = new char[strlen(hoten)];
-	strcpy(this->hoTen, hoten);
-	this->maSo = new char[strlen(mssv)];
-	strcpy(this->maSo, mssv);
-	this->ngSinh = new char[strlen(ngSinh)];
-	strcpy(this->ngSinh, ngSinh);
-}
-
-SinhVien::~SinhVien() { //loi
-	if (this->hoTen != NULL)
-		delete this->hoTen;
-	if (this->maSo != NULL)
-		delete this->maSo;
-	if (this->ngSinh != NULL)
-		delete this->ngSinh;
-}
-
-SinhVien::SinhVien(SinhVien* a) {
-	strcpy(this->hoTen, a->hoTen);
-	strcpy(this->maSo, a->maSo);
-	strcpy(this->ngSinh, a->ngSinh);
-}
-
-SinhVien* SinhVien::operator=(SinhVien* a) {
-	strcpy(this->hoTen, a->hoTen);
-	strcpy(this->maSo, a->maSo);
-	strcpy(this->ngSinh, a->ngSinh);
-	return this;
-}
-
-void xuatChuoi(char* a) {
-	for (int i = 0; i < strlen(a); i++) {
-		cout << a[i];
-	}
-}
-
 void SinhVien::xuat() {
 	cout << "Ho ten: ";
 	xuatChuoi(this->hoTen);
@@ -71,6 +90,7 @@ void SinhVien::xuat() {
 	xuatChuoi(this->maSo);
 	cout << "\nNgay sinh: ";
 	xuatChuoi(this->ngSinh);
+	cout << "\nstdAvg = " << tinhDiem() << endl;
 }
 
 double SinhVien::tinhDiem() {

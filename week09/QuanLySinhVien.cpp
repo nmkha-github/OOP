@@ -9,7 +9,7 @@ QuanLySinhVien::~QuanLySinhVien() {
 	delete[] dssv;
 }
 
-void QuanLySinhVien::themSV(SinhVien* a) {
+void QuanLySinhVien::themSV(SinhVien a) {
 	if (dssv == NULL) {
 		size = 1;
 		dssv = new SinhVien[size];

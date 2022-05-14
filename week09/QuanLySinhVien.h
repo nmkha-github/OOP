@@ -9,7 +9,7 @@ private:
 public:
 	QuanLySinhVien();
 	~QuanLySinhVien();
-	void themSV(SinhVien* a);
+	void themSV(SinhVien a);
 	void xoaSV(char* mssv);
 };
 
