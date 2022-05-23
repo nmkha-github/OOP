@@ -1,6 +1,7 @@
-#ifndef income_h
-#define income_h
-class Income{
+#ifndef Income_h
+#define Income_h
+#include <iostream>
+class Income {
 private:
     long long wifeSalary;
     long long husbandSalary;
@@ -17,5 +18,6 @@ public:
     long long getCoupleSalary();
     long long getOtherSalary();
     long long sumIncome();
-}
+    friend std::ostream& operator<<(std::ostream& out, const Income& p);
+};
 #endif
