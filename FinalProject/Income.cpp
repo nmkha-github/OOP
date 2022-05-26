@@ -1,22 +1,20 @@
 #include "Income.h"
 
-Income::Income(long long wife, long long husband, long long couple, long long other) {
+Income::Income(long long wife, long long husband, long long other) {
 	this->wifeSalary = wife;
 	this->husbandSalary = husband;
-	this->coupleSalary = couple;
+	this->coupleSalary = this->wifeSalary + this->husbandSalary;
 	this->otherSalary = other;
 }
 
 void Income::setWifeSalary(long long a) {
 	this->wifeSalary = a;
+	this->coupleSalary = this->wifeSalary + this->husbandSalary;
 }
 
 void Income::setHusbandSalary(long long a) {
 	this->husbandSalary = a;
-}
-
-void Income::setCoupleSalary(long long a) {
-	this->coupleSalary = a;
+	this->coupleSalary = this->wifeSalary + this->husbandSalary;
 }
 
 void Income::setOtherSalary(long long a) {
@@ -40,7 +38,7 @@ long long Income::getOtherSalary() {
 }
 
 long long Income::sumIncome() {
-	return this->husbandSalary + this->wifeSalary + this->coupleSalary + this->otherSalary;
+	return this->husbandSalary + this->wifeSalary + this->otherSalary;
 }
 
 friend std::ostream& operator<<(std::ostream& out, const Income& p);
