@@ -4,19 +4,28 @@ Loan::Loan(long long shortLoan, long long longLoan, double rate)
 {
 	this->shortLoan = shortLoan;
 	this->longLoan = longLoan;
-	this->rate = rate;
+	this->rate1 = rate;
+	this->rate2 = rate;
 }
 
-void Loan::changeRate(double val)
+void Loan::changeRate1(double val)
 {
-	rate = val;
+	rate1 = val;
 }
 
-double Loan::getRate()
+void Loan::changeRate2(double val)
 {
-	return rate;
+	rate2 = val;
 }
 
+double Loan::getRate1()
+{
+	return rate1;
+}
+double Loan::getRate2()
+{
+	return rate2;
+}
 long long Loan::getShortLoan()
 {
 	return shortLoan;
@@ -38,7 +47,10 @@ char* Loan::getDatePaying(char* type)
 std::ostream& operator<<(std::ostream& out, const Loan& p)
 {
 	out << "Tien no 1 nam ruoi: " << p.shortLoan << " VND\n";
+	out << "Thoi diem tra: 11/2023\n";
+	out << "Lai suat no: " << p.rate1 * 100 << "%/thang\n";
 	out << "Tien no 3 nam: " << p.longLoan << " VND\n";
-	out << "Lai suat no: " << p.rate * 100 << "%/thang\n";
+	out << "Thoi diem tra: 05/2025\n";
+	out << "Lai suat no: " << p.rate2 * 100 << "%/thang\n";
 	return out;
 }

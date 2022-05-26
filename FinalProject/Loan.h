@@ -6,11 +6,14 @@ class Loan {
 private:
 	long long shortLoan;
 	long long longLoan;
-	double rate;
+	double rate1;
+	double rate2;
 public:
 	Loan(long long shortLoan, long long longLoan, double rate);
-	void changeRate(double val);
-	double getRate();
+	void changeRate1(double val);
+	void changeRate2(double val);
+	double getRate1();
+	double getRate2();
 	long long getShortLoan();
 	long long getLongLoan();
 	char* getDatePaying(char* type);

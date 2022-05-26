@@ -42,6 +42,17 @@ long long Payment::sumPayment()
 	return housePayment + foodPayment + otherPayment;
 }
 
+std::istream& operator>>(std::istream& in, Payment& p)
+{
+	std::cout << "Nhap tien dien nuoc: ";
+	in >> p.housePayment;
+	std::cout << "Nhap tien an: ";
+	in >> p.foodPayment;
+	std::cout << "Nhap chi tieu khac: ";
+	in >> p.otherPayment;
+	return in;
+}
+
 std::ostream& operator<<(std::ostream& out, const Payment& p)
 {
 	out << "Tien dien nuoc: " << p.housePayment << " VND\n";

@@ -15,6 +15,7 @@ public:
     long long getFoodPayment();
     long long getOtherPayment();
     long long sumPayment();
+    friend std::istream& operator>>(std::istream& in, Payment& p);
     friend std::ostream& operator<<(std::ostream& out, const Payment& p);
 };
 #endif

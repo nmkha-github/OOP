@@ -40,7 +40,15 @@ long long Income::sumIncome()
 {
 	return wifeSalary + husbandSalary + otherSalary;
 }
-
+std::istream& operator>>(std::istream& in, Income& p) {
+	std::cout << "Nhap luong vo: "; 
+	in >> p.wifeSalary;
+	std::cout << "Nhap luong chong: ";
+	in >> p.husbandSalary;
+	std::cout << "Nhap thu nhap khac: ";
+	in >> p.otherSalary;
+	return in;
+}
 std::ostream& operator<<(std::ostream& out, const Income& p)
 {
 	out << "Luong vo: " << p.wifeSalary << " VND\n";
