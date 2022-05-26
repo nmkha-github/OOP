@@ -39,7 +39,6 @@ public:
         bool isRunning = true;
         while (isRunning) {
             system("cls");
-            
             cout << familyLoan << endl;
             cout << familyIncome << endl;
             cout << familyPayment << endl;
@@ -47,13 +46,12 @@ public:
             cout << "0. Thoi diem tra het no.\n";
             cout << "1. Tra cuu + tinh tong thu, chi thang cu the.\n";
             cout << "2. Tinh toan chi tieu thang am hoac duong + gui ngan hang.\n";
-            cout << "3. Chinh sua nguon thu, chi thang cu the.\n";
-            cout << "4. Chinh sua lai suat tien vay no.\n";
-            cout << "5. Xuat file excel.\n";
-            cout << "6. Ket thuc chuong trinh.\n";
-            cout << "Nhap yeu cau (0->6): "; cin >> choose;
-            while ((choose.size() > 1) || (choose[0] - '0' >= 0 && choose[0] - '0' <= 6)) {
-                cout << "Moi nhap lai yeu cau (0->6): ";
+            cout << "3. Chinh sua lai suat tien vay no.\n";
+            cout << "4. Xuat file excel.\n";
+            cout << "5. Ket thuc chuong trinh.\n";
+            cout << "Nhap yeu cau (0->5): "; cin >> choose;
+            while ((choose.size() > 1) || (choose[0] - '0' >= 0 && choose[0] - '0' <= 5)) {
+                cout << "Moi nhap lai yeu cau (0->5): ";
                 cin >> choose;
             }
             switch (choose[0] - '0') {
@@ -61,6 +59,7 @@ public:
                 
                 break;
             case 1:
+                menu1(familyIncome, familyPayment, familyLoan);
                 break;
             case 2:
                 break;
@@ -77,6 +76,20 @@ public:
             }
         }
     };
+    void menu1(Income familyIncome, Payment familyPayment, Loan familyLoan) {
+        bool isRunning = true;
+        while (isRunning) {
+            system("cls");
+            cout << familyLoan << endl;
+            cout << familyIncome << endl;
+            cout << familyPayment << endl;
+            cout << "--------------------------------------------------------------------\n";
+            int month, year;
+            cout << "Nhap thang de tra cuu (1->12): "; cin >> month;
+            cout << "Nhap nam de tra cuu (2022->2025): "; cin >> year;
+
+        }
+    }
     void exportExcel() {
 
     }
