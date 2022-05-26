@@ -1,37 +1,51 @@
 #include "Payment.h"
 
-Payment::Payment(long long housePayment, long long foodPayment, long long otherPayment) {
+Payment::Payment(long long housePayment, long long foodPayment, long long otherPayment)
+{
 	this->housePayment = housePayment;
 	this->foodPayment = foodPayment;
 	this->otherPayment = otherPayment;
 }
 
-void Payment::setHousePayment(long long value) {
-	this->housePayment = value;
+void Payment::setHousePayment(long long value)
+{
+	housePayment = value;
 }
 
-void Payment::setFoodPayment(long long value) {
-	this->foodPayment = value;
+void Payment::setFoodPayment(long long value)
+{
+	foodPayment = value;
 }
 
-void Payment::setOtherPayment(long long value) {
-	this->otherPayment = value;
+void Payment::setOtherPayment(long long value)
+{
+	otherPayment = value;
 }
 
-long long Payment::getHousePayment() {
-	return this->housePayment;
+long long Payment::getHousePayment()
+{
+	return housePayment;
 }
 
-long long Payment::getFoodPayment() {
-	return this->foodPayment;
+long long Payment::getFoodPayment()
+{
+	return foodPayment;
 }
 
-long long Payment::getOtherPayment() {
-	return this->otherPayment;
+long long Payment::getOtherPayment()
+{
+	return otherPayment;
 }
 
-long long Payment::sumPayment() {
-	return this->foodPayment + this->housePayment + this->otherPayment;
+long long Payment::sumPayment()
+{
+	return housePayment + foodPayment + otherPayment;
 }
 
-friend std::ostream& operator<<(std::ostream& out, const Payment& p);
+std::ostream& operator<<(std::ostream& out, const Payment& p)
+{
+	out << "Tien dien nuoc: " << p.housePayment << " VND\n";
+	out << "Tien an: " << p.foodPayment << " VND\n";
+	out << "Chi tieu khac: " << p.otherPayment << " VND\n";
+	return out;
+}

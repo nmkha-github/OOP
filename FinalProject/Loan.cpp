@@ -1,23 +1,44 @@
 #include "Loan.h"
 
-Loan::Loan(long long debt, double rate, char datePaying[]) {
-	this->debt = debt;
+Loan::Loan(long long shortLoan, long long longLoan, double rate)
+{
+	this->shortLoan = shortLoan;
+	this->longLoan = longLoan;
 	this->rate = rate;
-	strcpy(this->datePaying, datePaying);
 }
 
-void Loan::changeRate(double val) {
-	this->rate = val;
+void Loan::changeRate(double val)
+{
+	rate = val;
 }
 
-double Loan::getRate() {
-	return this->rate;
+double Loan::getRate()
+{
+	return rate;
 }
 
-long long Loan::getDebt() {
-	return this->debt;
+long long Loan::getShortLoan()
+{
+	return shortLoan;
 }
 
-char* Loan::getDatePaying() {
-	return this->datePaying;
+long long Loan::getLongLoan()
+{
+	return 0;
+}
+
+char* Loan::getDatePaying(char* type)
+{
+	if (type == "short")
+		return (char*) "Thang 11 nam 2023";
+	return (char*)"Thang 5 nam 2025";
+}
+
+
+std::ostream& operator<<(std::ostream& out, const Loan& p)
+{
+	out << "Tien no 1 nam ruoi: " << p.shortLoan << " VND\n";
+	out << "Tien no 3 nam: " << p.longLoan << " VND\n";
+	out << "Lai suat no: " << p.rate * 100 << "%/thang\n";
+	return out;
 }
