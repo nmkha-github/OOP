@@ -183,19 +183,18 @@ public:
                 int type;
                 cin >> type;
                 if (type == 1) {
-                    familyBankBook.setDeadline({ ((month + 6 > 12) ? (month + 6) % 12 + 1: month + 6) , year + int(month / 12)});
+                    familyBankBook.setDeadline({ ((month + 6 > 12) ? (month + 6) % 12: month + 6) , year + int(month / 12)});
                     familyBankBook.setRate(6.0 / 100);
                 }
                 else {
                     familyBankBook.setDeadline({ month, year + 1});
                     familyBankBook.setRate(6.6 / 100);
                 }
+                cout << "Da gui thanh cong\n";
+                system("pause");
             }
         }
         else {
-            long long money;
-            cout << "Nhap so tien muon gui: "; cin >> money;
-            familyBankBook.addMoney(money);
             int month, year;
             cout << "Nhap nam gui (2022->2025): "; cin >> year;
             if (year == 2022)
@@ -205,20 +204,21 @@ public:
             else
                 cout << "Nhap thang gui (1->12): ";
             cin >> month;
+            familyBankBook.addMoney((familyIncome.sumIncome() - familyPayment.sumPayment()) * (year * 12 + month - 2022 * 12 - 5));
             familyBankBook.setStartDay({ month, year });
-            cout << "Nhap nam het han (2022->2025): "; cin >> year;
-            if (year == 2022)
-                cout << "Nhap thang het han (5->12): ";
-            else if (year == 2025)
-                cout << "Nhap thang het han (1->5): ";
-            else
-                cout << "Nhap thang het han (1->12): ";
-            cin >> month;
-            familyBankBook.setDeadline({ month, year });
-            cout << "Nhap lai suat (%/thang): ";
-            double rate;
-            cin >> rate;
-            familyBankBook.setRate(rate);
+            cout << "Chon thoi han gui\n1. 6 thang\n2. 12 thang\nNhap lua chon: ";
+            int type;
+            cin >> type;
+            if (type == 1) {
+                familyBankBook.setDeadline({ ((month + 6 > 12) ? (month + 6) % 12 : month + 6) , year + int((month + 6) / 12) });
+                familyBankBook.setRate(6.0 / 100);
+            }
+            else {
+                familyBankBook.setDeadline({ month, year + 1 });
+                familyBankBook.setRate(6.6 / 100);
+            }
+            cout << "Da gui thanh cong\n";
+            system("pause");
         }
     }
     void option6(Income familyIncome, Payment familyPayment, Loan familyLoan, BankBook familyBankBook) {
@@ -234,7 +234,7 @@ public:
         else
             cout << "Nhap thang de tra cuu (1->12): ";
         cin >> month;
-        cout << "So tien lai thang " << month << '/' << year << ": " << familyBankBook.getProfit({month, year});
+        cout << "So tien lai va von thang " << month << '/' << year << ": " << familyBankBook.getProfit({month, year}) << '\n';
         system("pause");
     }
     void exportExcel() {

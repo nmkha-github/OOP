@@ -44,8 +44,8 @@ long long BankBook::getProfit(date time)
 	if (time.year < startDay.year || (time.year == startDay.year && time.month < startDay.month))
 		return 0;
 	if (time.year > deadline.year || (time.year == deadline.year && time.month > deadline.month))
-		return pow(1 + rate, deadline.year * 12 + deadline.month - startDay.year * 12 + startDay.month) * moneySaving;
-	return pow(1 + rate, time.year * 12 + time.month - startDay.year * 12 + startDay.month) * moneySaving;
+		return pow(1 + rate, deadline.year * 12 + deadline.month - startDay.year * 12 - startDay.month) * moneySaving;
+	return pow(1 + rate, time.year * 12 + time.month - startDay.year * 12 - startDay.month) * moneySaving;
 }
 
 std::ostream& operator<<(std::ostream& out, const BankBook& p)
@@ -53,7 +53,7 @@ std::ostream& operator<<(std::ostream& out, const BankBook& p)
 	out << "So tien tiet kiem: " << p.moneySaving << " (VND)\n";
 	out << "Ngay gui: " << p.startDay.month << '/' << p.startDay.year << '\n';
 	out << "Ngay dao han: " << p.deadline.month << '/' << p.deadline.year << '\n';
-	out << "Lai suat: " << p.rate * 100 << "%/nam\n";
+	out << "Lai suat: " << p.rate * 100 << "%/thang\n";
 	return out;
 }
 
