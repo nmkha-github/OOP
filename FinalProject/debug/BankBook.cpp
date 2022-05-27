@@ -39,13 +39,21 @@ void BankBook::setRate(double val)
 	rate = val;
 }
 
+bool BankBook::isDeadline(date time) {
+	int num = (deadline.year - startDay.year) * 12 + (deadline.month - startDay.month);
+	if (num < 0) {
+		return false;
+	}
+	else
+		return true;
+}
+
 long long BankBook::getProfit(date time)
 {
-	if (time.year < startDay.year || (time.year == startDay.year && time.month < startDay.month))
+	if (isDeadline(time) == false)
 		return 0;
-	if (time.year > deadline.year || (time.year == deadline.year && time.month > deadline.month))
-		return pow(1 + rate, deadline.year * 12 + deadline.month - startDay.year * 12 - startDay.month) * moneySaving;
-	return pow(1 + rate, time.year * 12 + time.month - startDay.year * 12 - startDay.month) * moneySaving;
+	else
+		return moneySaving * (1 + rate);
 }
 
 std::ostream& operator<<(std::ostream& out, const BankBook& p)
