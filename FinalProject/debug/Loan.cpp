@@ -33,7 +33,7 @@ long long Loan::getShortLoan()
 
 long long Loan::getLongLoan()
 {
-	return 0;
+	return longLoan;
 }
 
 char* Loan::getDatePaying(char* type)

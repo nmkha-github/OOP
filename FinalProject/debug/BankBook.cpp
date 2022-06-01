@@ -1,6 +1,6 @@
 #include "BankBook.h"
 
-BankBook::BankBook(long long moneySaving, date startDay, date deadline, double rate)
+BankBook::BankBook(long long moneySaving, Date startDay, Date deadline, double rate)
 {
 	this->moneySaving = (moneySaving > 0) ? moneySaving: 0;
 	this->startDay = startDay;
@@ -24,12 +24,12 @@ void BankBook::addMoney(long long val)
 		moneySaving += val;
 }
 
-void BankBook::setStartDay(date day)
+void BankBook::setStartDay(Date day)
 {
 	startDay = day;
 }
 
-void BankBook::setDeadline(date day)
+void BankBook::setDeadline(Date day)
 {
 	deadline = day;
 }
@@ -39,7 +39,7 @@ void BankBook::setRate(double val)
 	rate = val;
 }
 
-long long BankBook::getProfit(date time)
+long long BankBook::getProfit(Date time)
 {
 	if (time.year < startDay.year || (time.year == startDay.year && time.month < startDay.month))
 		return 0;

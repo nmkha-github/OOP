@@ -3,9 +3,8 @@
 #define Date_h
 #include <iostream>
 class Date {
-private:
-	int month, year;
 public:
+	int month, year;
 	Date();
 	Date(int month, int year);
 	int operator-(const Date& p);

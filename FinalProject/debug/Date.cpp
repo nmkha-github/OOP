@@ -40,7 +40,7 @@ Date Date::input()
 			std::cout << "Nhap thang (1->12): ";
 		std::cin >> month;
 		p = Date(month, year);
-	} while (p - startDate < 0 && endDate - p < 0);
+	} while (p - startDate < 0 || endDate - p < 0);
 	return p;
 }
 
