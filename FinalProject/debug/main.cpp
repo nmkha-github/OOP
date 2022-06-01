@@ -31,6 +31,7 @@ public:
         double rate1;
         cout << "Nhap tien no 1 nam ruoi (VND): "; cin >> shortLoan;
         cout << "Nhap lai suat 1 nam ruoi (%/thang): "; cin >> rate1;
+        rate1 /= 100;
         cout << "Nhap tien no 3 nam (VND) (voi lai co dinh 6%/nam): "; cin >> longLoan;
         //---------------------------Init value----------------------------------
         Income familyIncomes[40];
@@ -104,6 +105,7 @@ public:
         cout << "3. Tien no.\n";
         cout << "Nhap lua chon (1->3): "; 
         int q; cin >> q;
+        cout << "Thang " << date << ":\n";
         if (q == 1)
             cout << familyIncomes[date - Date(5, 2022)];
         else
@@ -113,8 +115,8 @@ public:
         if (q == 3) {
             cout << familyLoan;
             cout << "Tien lai thang " << date << ":\n";
-            cout << "1 nam ruoi: " << familyLoan.getRate1() * familyLoan.getShortLoan() << " (VND)\n";
-            cout << "1 nam ruoi: " << familyLoan.getRate2() * familyLoan.getLongLoan() << " (VND)\n";
+            cout << "1 nam ruoi: " << familyLoan.getRate1() * (double) familyLoan.getShortLoan() << " (VND)\n";
+            cout << "3 nam: " << familyLoan.getRate2() * (double) familyLoan.getLongLoan() << " (VND)\n";
         }
         system("pause");
     }
@@ -128,6 +130,7 @@ public:
         cout << "3. Tien no.\n";
         cout << "Nhap lua chon (1->3): ";
         int q; cin >> q;
+        cout << "Thang " << date << ":\n";
         if (q == 1)
             cin >> familyIncomes[date - Date(5, 2022)];
         else
