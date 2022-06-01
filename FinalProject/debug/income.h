@@ -7,13 +7,14 @@ private:
     long long husbandSalary;
     long long otherSalary;
 public:
+    Income();
     Income(long long wife, long long husband, long long other);
     void setWifeSalary(long long a);
     void setHusbandSalary(long long a);
-    void setOtherSalary(long long a);
+    void setOtherIncome(long long a);
     long long getWifeSalary();
     long long getHusbandSalary();
-    long long getOtherSalary();
+    long long getOtherIncome();
     long long sumIncome();
     friend std::istream& operator>>(std::istream& in, Income& p);
     friend std::ostream& operator<<(std::ostream& out, const Income& p);

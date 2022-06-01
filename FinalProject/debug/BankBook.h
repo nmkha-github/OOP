@@ -21,6 +21,5 @@ public:
 	void setRate(double val);
 	long long getProfit(date time);
 	friend std::ostream& operator<<(std::ostream& out, const BankBook& p);
-	
 };
 #endif // !BankBook_h

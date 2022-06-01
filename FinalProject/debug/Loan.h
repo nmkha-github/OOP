@@ -9,7 +9,7 @@ private:
 	double rate1;
 	double rate2;
 public:
-	Loan(long long shortLoan, long long longLoan, double rate);
+	Loan(long long shortLoan, double rate, long long longLoan);
 	void changeRate1(double val);
 	void changeRate2(double val);
 	double getRate1();
@@ -18,5 +18,6 @@ public:
 	long long getLongLoan();
 	char* getDatePaying(char* type);
 	friend std::ostream& operator<<(std::ostream& out, const Loan& p);
+	friend std::istream& operator>>(std::istream& in, Loan& p);
 };
 #endif // !Loan_h

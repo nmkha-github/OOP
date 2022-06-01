@@ -1,5 +1,12 @@
 #include "Income.h"
 
+Income::Income()
+{
+	this->wifeSalary = 0;
+	this->husbandSalary = 0;
+	this->otherSalary = 0;
+}
+
 Income::Income(long long wife, long long husband, long long other)
 {
 	this->wifeSalary = wife;
@@ -17,7 +24,7 @@ void Income::setHusbandSalary(long long a)
 	husbandSalary = a;
 }
 
-void Income::setOtherSalary(long long a)
+void Income::setOtherIncome(long long a)
 {
 	otherSalary = a;
 }
@@ -31,7 +38,7 @@ long long Income::getHusbandSalary()
 {
 	return husbandSalary;
 }
-long long Income::getOtherSalary()
+long long Income::getOtherIncome()
 {
 	return otherSalary;
 }

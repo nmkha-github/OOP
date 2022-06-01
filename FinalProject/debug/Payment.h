@@ -7,6 +7,7 @@ private:
     long long foodPayment;
     long long otherPayment;
 public:
+    Payment();
     Payment(long long housePayment, long long foodPayment, long long otherPayment);
     void setHousePayment(long long value);
     void setFoodPayment(long long value);

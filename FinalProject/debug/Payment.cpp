@@ -1,5 +1,12 @@
 #include "Payment.h"
 
+Payment::Payment()
+{
+	this->foodPayment = 0;
+	this->housePayment = 0;
+	this->otherPayment = 0;
+}
+
 Payment::Payment(long long housePayment, long long foodPayment, long long otherPayment)
 {
 	this->housePayment = housePayment;

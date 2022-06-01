@@ -1,8 +1,10 @@
 #include <iostream>
+#include <vector>
 #include "Income.h"
 #include "Payment.h"
 #include "Loan.h"
 #include "BankBook.h"
+#include "Date.h"
 using namespace std;
 class Menu {
 private:
@@ -26,56 +28,61 @@ public:
         cout << "Nhap khoan chi tieu khac (VND): "; cin >> otherPayment;
         cout << "--------------Thong tin vay no----------------------------\n";
         long long shortLoan, longLoan;
+        double rate1;
         cout << "Nhap tien no 1 nam ruoi (VND): "; cin >> shortLoan;
-        cout << "Nhap tien no 3 nam (VND): "; cin >> longLoan;
-        Income familyIncome(wifeSalary, husbandSalary, otherIncome);
-        Payment familyPayment(housePayment, foodPayment, otherPayment);
-        Loan familyLoan(shortLoan, longLoan, 0.065);
-        BankBook familyBankBook;
+        cout << "Nhap lai suat 1 nam ruoi (%/thang): "; cin >> rate1;
+        cout << "Nhap tien no 3 nam (VND) (voi lai co dinh 6%/nam): "; cin >> longLoan;
+        //---------------------------Init value----------------------------------
+        Income familyIncomes[40];
+        for (int i = 0; i < 36; i++) {
+            familyIncomes[i].setWifeSalary(wifeSalary);
+            familyIncomes[i].setHusbandSalary(husbandSalary);
+            familyIncomes[i].setOtherIncome(otherIncome);
+        }
+        Payment familyPayments[40];
+        for (int i = 0; i < 36; i++) {
+            familyPayments[i].setHousePayment(housePayment);
+            familyPayments[i].setFoodPayment(foodPayment);
+            familyPayments[i].setOtherPayment(otherPayment);
+        }
+        Loan familyLoan(shortLoan, rate1, longLoan);
+        vector <BankBook> familyBankBooks;
         bool isRunning = true;
         while (isRunning) {
             system("cls");
-            cout << familyLoan << endl;
-            cout << familyIncome << endl;
-            cout << familyPayment << endl;
-            cout << "--------------------------------------------------------------------\n";
             cout << "0. Thoi diem tra het no. (chua xong)\n";
-            cout << "1. Tra cuu + tinh tong thu, chi thang cu the.\n";
-            cout << "2. Tinh toan chi tieu thang am hoac duong.\n";
-            cout << "3. Thay doi thu nhap, chi tieu hang thang.\n";
-            cout << "4. Chinh sua lai suat tien vay no.\n";
-            cout << "5. Gui tiet kiem.\n";
-            cout << "6. So tiet kiem.\n";
-            cout << "7. Xuat file excel. (chua xong)\n";
-            cout << "8. Ket thuc chuong trinh.\n";
-            cout << "Nhap yeu cau (0->8): "; cin >> choose;
-            while ((choose.size() > 1) || (choose[0] - '0' < 0 && choose[0] - '0' > 8)) {
-                cout << "Moi nhap lai yeu cau (0->5): ";
+            cout << "1. Tra cuu.\n";
+            cout << "2. Chinh sua.\n";
+            cout << "3. Tinh hinh thu nhap cua thang (duong, am).\n";
+            cout << "4. Gui tiet kiem.\n";
+            cout << "5. So tiet kiem.\n";
+            cout << "6. Xuat file excel. (chua xong)\n";
+            cout << "7. Ket thuc chuong trinh.\n";
+            cout << "Nhap yeu cau (0->7): "; cin >> choose;
+            while ((choose.size() > 1) || (choose[0] - '0' < 0 && choose[0] - '0' > 7)) {
+                cout << "Moi nhap lai yeu cau (0->7): ";
                 cin >> choose;
             }
             switch (choose[0] - '0') {
             case 0:
-                
+                //option0();
                 break;
             case 1:
-                option1(familyIncome, familyPayment, familyLoan);
+                option1(familyIncomes, familyPayments, familyLoan);
                 break;
             case 2:
-                option2(familyIncome, familyPayment, familyLoan);
+                option2(familyIncomes, familyPayments, familyLoan);
                 break;
             case 3:
-                option3(familyIncome, familyPayment, familyLoan);
+                option3(familyIncomes, familyPayments);
                 break;
             case 4:
-                option4(familyIncome, familyPayment, familyLoan);
+                option4();
                 break;
             case 5:
-                option5(familyIncome, familyPayment, familyLoan, familyBankBook);
+                option5();
                 break;
             case 6:
-                option6(familyIncome, familyPayment, familyLoan, familyBankBook);
-                break;
-            case 7:
                 exportExcel();
                 break;
             default:
@@ -84,158 +91,104 @@ public:
             }
         }
     };
-    void infor(Income familyIncome, Payment familyPayment, Loan familyLoan) {
-        system("cls");
-        cout << familyLoan << endl;
-        cout << familyIncome << endl;
-        cout << familyPayment << endl;
-        cout << "--------------------------------------------------------------------\n";
-    }
-    void option1(Income familyIncome, Payment familyPayment, Loan familyLoan) {    
-        infor(familyIncome, familyPayment, familyLoan);
-        int month, year;
-        cout << "Nhap nam de tra cuu (2022->2025): "; cin >> year;
-        if (year == 2022)
-            cout << "Nhap thang de tra cuu (5->12): ";
-        else if (year == 2025)
-            cout << "Nhap thang de tra cuu (1->5): ";
-        else 
-            cout << "Nhap thang de tra cuu (1->12): ";
-        cin >> month;
-        
-        cout << "Thong tin thang " << month << '/' << year << ':' << endl;
-        cout << "- Tong thu: " << familyIncome.sumIncome() << '\n';
-        cout << "- Tong chi: " << familyPayment.sumPayment() << '\n';
-        cout << "- Tien du cac thang truoc: "
-            << (familyIncome.sumIncome() - familyPayment.sumPayment()) * (year * 12 + month - 2022 * 12 - 5) << '\n';
-        system("pause");
-    }
-    void option2(Income familyIncome, Payment familyPayment, Loan familyLoan) {
-        system("cls");
-        cout << familyLoan << endl;
-        cout << familyIncome << endl;
-        cout << familyPayment << endl;
-        cout << "--------------------------------------------------------------------\n";
-        int month, year;
-        cout << "Nhap nam de tinh toan (2022->2025): "; cin >> year;
-        if (year == 2022)
-            cout << "Nhap thang de tinh toan (5->12): ";
-        else if (year == 2025)
-            cout << "Nhap thang de tinh toan (1->5): ";
-        else
-            cout << "Nhap thang de tinh toan (1->12): ";
-        cin >> month;
+    void option0(Income familyIncomes[], Payment familyPayments[], Loan familyLoan) {
 
-        long long monthPaying = (familyIncome.sumIncome() - familyPayment.sumPayment());
-        if (monthPaying >= 0)
-            cout << "Chi tieu thang " << month << '/' << year << " duong " << monthPaying << " (VND)\n";
-        else {
-            cout << "Chi tieu thang " << month << '/' << year << " am " << monthPaying << " (VND)\n";
-            cout << "Can thay doi chi tieu (lua chon so 3)";
+    }
+    void option1(Income familyIncomes[], Payment familyPayments[], Loan familyLoan) {
+        system("cls");
+        cout << "----Tra cuu.\n";
+        Date date;
+        date = date.input();
+        cout << "1. Thu nhap.\n";
+        cout << "2. Chi tieu.\n";
+        cout << "3. Tien no.\n";
+        cout << "Nhap lua chon (1->3): "; 
+        int q; cin >> q;
+        if (q == 1)
+            cout << familyIncomes[date - Date(5, 2022)];
+        else
+        if (q == 2)
+            cout << familyPayments[date - Date(5, 2022)];
+        else
+        if (q == 3) {
+            cout << familyLoan;
+            cout << "Tien lai thang " << date << ":\n";
+            cout << "1 nam ruoi: " << familyLoan.getRate1() * familyLoan.getShortLoan() << " (VND)\n";
+            cout << "1 nam ruoi: " << familyLoan.getRate2() * familyLoan.getLongLoan() << " (VND)\n";
         }
         system("pause");
     }
-    void option3(Income& familyIncome, Payment& familyPayment, Loan& familyLoan) {
-        infor(familyIncome, familyPayment, familyLoan);
-        cout << "1. Thay doi chi tieu.\n";
-        cout << "2. Thay doi thu nhap.\n";
-        int q;
-        cout << "Nhap lua chon (1->2): "; cin >> q;
+    void option2(Income familyIncomes[], Payment familyPayments[], Loan& familyLoan) {
+        system("cls");
+        cout << "----Chinh sua.\n";
+        Date date;
+        date = date.input();
+        cout << "1. Thu nhap.\n";
+        cout << "2. Chi tieu.\n";
+        cout << "3. Tien no.\n";
+        cout << "Nhap lua chon (1->3): ";
+        int q; cin >> q;
         if (q == 1)
-            cin >> familyPayment;
-        else if (q == 2)
-            cin >> familyIncome;
+            cin >> familyIncomes[date - Date(5, 2022)];
+        else
+        if (q == 2)
+            cin >> familyPayments[date - Date(5, 2022)];
+        else
+        if (q == 3)
+            cin >> familyLoan;
+        else {
+            cout << "Lua chon sai.\nChinh sua that bai.\n";
+            system("pause");
+            return;
+        }
+        cout << "Chinh sua thanh cong.\n";
         system("pause");
     }
-    void option4(Income familyIncome, Payment familyPayment, Loan& familyLoan) {
-        infor(familyIncome, familyPayment, familyLoan);
-        cout << "Nhap lai suat tien vay no 1 nam ruoi (%): ";
-        double rate;
-        cin >> rate;
-        familyLoan.changeRate1(rate / 100);
-        cout << "Nhap lai suat tien vay no 3 nam (%): ";
-        cin >> rate;
-        familyLoan.changeRate2(rate / 100);
-        infor(familyIncome, familyPayment, familyLoan);
-        cout << "Nhap lai suat tien vay no 1 nam ruoi (%): " << familyLoan.getRate1() * 100 << endl;
-        cout << "Nhap lai suat tien vay no 3 nam (%): " << familyLoan.getRate2() * 100 << endl;
-        system("pause");
-    }
-    void option5(Income familyIncome, Payment familyPayment, Loan familyLoan, BankBook& familyBankBook) {
-        infor(familyIncome, familyPayment, familyLoan);
-        if (isSaved) {
-            cout << "Ban se mat tien lai da gui, tien tiet kiem lan truoc se cong vao tiep theo.\nXac nhan gui (y/n): ";
-            string q;
-            cin >> q;
-            if (q == "y") {
-                int month, year;
-                cout << "Nhap nam gui (2022->2025): "; cin >> year;
-                if (year == 2022)
-                    cout << "Nhap thang gui (5->12): ";
-                else if (year == 2025)
-                    cout << "Nhap thang gui (1->5): ";
-                else
-                    cout << "Nhap thang gui (1->12): ";
-                cin >> month;
-                familyBankBook.addMoney((familyIncome.sumIncome() - familyPayment.sumPayment()) * (year * 12 + month - 2022 * 12 - 5));
-                familyBankBook.setStartDay({ month, year });
-                cout << "Chon thoi han gui\n1. 6 thang\n2. 12 thang\nNhap lua chon: ";
-                int type;
-                cin >> type;
-                if (type == 1) {
-                    familyBankBook.setDeadline({ ((month + 6 > 12) ? (month + 6) % 12: month + 6) , year + int(month / 12)});
-                    familyBankBook.setRate(6.0 / 100);
+    void option3(Income familyIncomes[], Payment familyPayments[]) {
+        system("cls");
+        cout << "----Tinh hinh thu nhap.\n";
+        Date date;
+        date = date.input();
+        long long found = familyIncomes[date - Date(5, 2022)].getOtherIncome() - familyPayments[date - Date(5, 2022)].sumPayment();
+        if (found >= 0)
+            cout << "Thu nhap thang " << date << " duong " << found << " (VND).\n";
+        else {
+            cout << "Thu nhap thang " << date << " am " << -found << " (VND).\n";
+            long long pastMonthMoney = 0;
+            for (int i = 0; i < date - Date(5, 2022); i++)
+                pastMonthMoney += familyIncomes[i].getOtherIncome() - familyPayments[i].sumPayment();
+            cout << "Tien du cac thang truoc: " << pastMonthMoney << " (VND).\n";
+            cout << "Luong vo: " << familyIncomes[date - Date(5, 2022)].getWifeSalary() << " (VND).\n";
+            cout << "Luong chong: " << familyIncomes[date - Date(5, 2022)].getHusbandSalary() << " (VND).\n";
+            if (pastMonthMoney + familyIncomes[date - Date(5, 2022)].getWifeSalary() + familyIncomes[date - Date(5, 2022)].getHusbandSalary() + found < 0)
+                cout << "Vo no.\n";
+            else
+                if (pastMonthMoney + found >= 0) {
+                    cout << "Tien du cac thang truoc + thu nhap thang " << date << ": " << pastMonthMoney + found << " duong"
+                        << " => Khong can dung luong vo/chong bu qua.\n";
+                }
+            else {
+                if (found + familyIncomes[date - Date(5, 2022)].getHusbandSalary() >= 0) {
+                    cout << "Dung " << -found << " luong chong bu qua thu nhap khac";
+                    familyIncomes[date - Date(5, 2022)].setOtherIncome(familyIncomes[date - Date(5, 2022)].getOtherIncome() - found);
+                    familyIncomes[date - Date(5, 2022)].setHusbandSalary(familyIncomes[date - Date(5, 2022)].getHusbandSalary() + found);
                 }
                 else {
-                    familyBankBook.setDeadline({ month, year + 1});
-                    familyBankBook.setRate(6.6 / 100);
+                    cout << "Dung " << familyIncomes[date - Date(5, 2022)].getHusbandSalary() << " luong chong + "
+                        << -(found + familyIncomes[date - Date(5, 2022)].getHusbandSalary()) << " luong vo\nbu qua thu nhap khac.\n";
+                    familyIncomes[date - Date(5, 2022)].setOtherIncome(familyIncomes[date - Date(5, 2022)].getOtherIncome() - found);
+                    familyIncomes[date - Date(5, 2022)].setWifeSalary(familyIncomes[date - Date(5, 2022)].getWifeSalary() + familyIncomes[date - Date(5, 2022)].getHusbandSalary() + found);
+                    familyIncomes[date - Date(5, 2022)].setHusbandSalary(0);
                 }
-                cout << "Da gui thanh cong\n";
-                system("pause");
             }
         }
-        else {
-            int month, year;
-            cout << "Nhap nam gui (2022->2025): "; cin >> year;
-            if (year == 2022)
-                cout << "Nhap thang gui (5->12): ";
-            else if (year == 2025)
-                cout << "Nhap thang gui (1->5): ";
-            else
-                cout << "Nhap thang gui (1->12): ";
-            cin >> month;
-            familyBankBook.addMoney((familyIncome.sumIncome() - familyPayment.sumPayment()) * (year * 12 + month - 2022 * 12 - 5));
-            familyBankBook.setStartDay({ month, year });
-            cout << "Chon thoi han gui\n1. 6 thang\n2. 12 thang\nNhap lua chon: ";
-            int type;
-            cin >> type;
-            if (type == 1) {
-                familyBankBook.setDeadline({ ((month + 6 > 12) ? (month + 6) % 12 : month + 6) , year + int((month + 6) / 12) });
-                familyBankBook.setRate(6.0 / 100);
-            }
-            else {
-                familyBankBook.setDeadline({ month, year + 1 });
-                familyBankBook.setRate(6.6 / 100);
-            }
-            cout << "Da gui thanh cong\n";
-            system("pause");
-        }
-    }
-    void option6(Income familyIncome, Payment familyPayment, Loan familyLoan, BankBook familyBankBook) {
-        infor(familyIncome, familyPayment, familyLoan);
-        cout << "Thong tin so tiet kiem:\n";
-        cout << familyBankBook;
-        int month, year;
-        cout << "Nhap nam de tra cuu (2022->2025): "; cin >> year;
-        if (year == 2022)
-            cout << "Nhap thang de tra cuu (5->12): ";
-        else if (year == 2025)
-            cout << "Nhap thang de tra cuu (1->5): ";
-        else
-            cout << "Nhap thang de tra cuu (1->12): ";
-        cin >> month;
-        cout << "So tien lai va von thang " << month << '/' << year << ": " << familyBankBook.getProfit({month, year}) << '\n';
         system("pause");
+    }
+    void option4() {
+        
+    }
+    void option5() {
+        
     }
     void exportExcel() {
 
