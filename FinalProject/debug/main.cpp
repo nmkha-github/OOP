@@ -51,7 +51,7 @@ public:
         bool isRunning = true;
         while (isRunning) {
             system("cls");
-            cout << "0. Thoi diem tra het no. (chua xong)\n";
+            cout << "0. Thoi diem tra het no.\n";
             cout << "1. Tra cuu.\n";
             cout << "2. Chinh sua.\n";
             cout << "3. Tinh hinh thu nhap cua thang (duong, am).\n";
