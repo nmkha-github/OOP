@@ -92,45 +92,36 @@ public:
             }
         }
     };
-    void option0(Income familyIncomes[], Payment familyPayments[], Loan familyLoan, vector<BankBook> &familyBankBook) {
+    void option0(Income familyIncomes[], Payment familyPayments[], Loan familyLoan, vector<BankBook> familyBankBook) {
         system("cls");
         // Short Loan
         Date date;
         date.month = 12;
         date.year = 2023;
         long long sumBooks = 0;
+        long long sumBeforeShortLoan = 0;
         long long sumShortLoan = familyLoan.getShortLoan() * (1 + familyLoan.getRate1());
-        long long pastMonthMoney = 0;
         for (int i = 0; i < date - Date(5, 2022); i++)
-            pastMonthMoney += familyIncomes[i].getOtherIncome() - familyPayments[i].sumPayment();
-        long long thisMonth = pastMonthMoney - familyPayments[17].sumPayment();
-        if (thisMonth < 0) {
-            if (familyIncomes[17].getHusbandSalary() < -thisMonth) {
-                thisMonth += familyIncomes[17].getHusbandSalary();
-                familyIncomes[17].setHusbandSalary(0);
-                thisMonth += familyIncomes[17].getWifeSalary();
-                if (thisMonth < 0)
-                {
-                    familyIncomes[17].setWifeSalary(0);
-                }
-            }
+        {
+            sumBeforeShortLoan += familyIncomes[i].sumSalary() - familyPayments[i].sumPayment();
         }
 
         for (int i = 0; i < familyBankBooks.size(); i++) {
             if (familyBankBooks[i].getDeadline() - date < 0) // truoc thoi han 12/2023 
             {
-                sumBooks += familyBankBooks[i].getProfit(date);
+                sumBooks += familyBankBooks[i].getRate() * familyBankBooks[i].getMoneySaving();
                 familyBankBooks.erase(familyBankBooks.begin() + i);
             }
         }
+
+        sumBeforeShortLoan += sumBooks;
         // Long Loan
         Date dateLongLoan;
         dateLongLoan.month = 5;
         dateLongLoan.year = 2025;
         long long sumLongLoan = familyLoan.getLongLoan() * (1 + familyLoan.getRate2());
-        long long  moneyAfterShortLoan = sumBooks + thisMonth - sumShortLoan;
-        long long changeAfterShortLoan = moneyAfterShortLoan;
-        if (moneyAfterShortLoan >= 0) {
+        long long sumAfterShortLoan = sumBeforeShortLoan - sumShortLoan;
+        if (sumAfterShortLoan >= 0) {
             cout << "Co kha nang tra no thoi han ngan\n";
         }
         else {
@@ -138,15 +129,15 @@ public:
         }
 
         for (int i = 18; i < dateLongLoan - Date(12, 2023); i++)
-            changeAfterShortLoan += familyIncomes[i].getOtherIncome() - familyPayments[i].sumPayment();
-        long long changeTotal = changeAfterShortLoan - familyPayments[38].sumPayment(); // tong tien thua tinh den ngay 5/2025
+            sumAfterShortLoan += familyIncomes[i].sumSalary() - familyPayments[i].sumPayment();
 
+        sumBooks = 0;
         for (int i = 0; i < familyBankBooks.size(); i++) { // rut het so
-            moneyAfterShortLoan += familyBankBooks[i].getProfit(dateLongLoan);
+            sumBooks += familyBankBooks[i].getRate() * familyBankBooks[i].getMoneySaving();
             familyBankBooks.erase(familyBankBooks.begin() + i);
         }
-
-        if (moneyAfterShortLoan - sumLongLoan >= 0)
+        sumAfterShortLoan += sumBooks;
+        if (sumAfterShortLoan - sumLongLoan >= 0)
             cout << "Co kha nang tra no thoi han dai\n";
         else
             cout << "Khong co kha nang tra no thoi han dai\n";
