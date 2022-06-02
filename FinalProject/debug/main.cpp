@@ -363,7 +363,7 @@ public:
         file << ",Tien no 3 nam:," << familyLoan.getLongLoan() << ",Lai suat (%/nam):," << familyLoan.getRate2() * 100 << '\n';
         file << ",Ngay tra no duoc no:," << monthLongLoan << '/' << yearLongLoan << '\n';
         if (familyBankBooks.size()) {
-            file << "So tiet kiem\n";
+            file << "\nSo tiet kiem\n";
             file << "STT,So tien,Lai suat,Ngay gui,Ngay het han\n";
         }
         int stt = 0;
@@ -373,11 +373,14 @@ public:
                 << book.getStartDay().month << '/' << book.getStartDay().year << ','
                 << book.getDeadline().month << '/' << book.getDeadline().year << '\n';
         }
+        file << "\nThong tin thu nhap - chi tieu\n";
         file << "Thang,Luong vo,Luong chong,Thu nhap khac,Tien dien nuoc,Tien an,Chi tieu khac\n";
         for (int i = 0; i < 36; i++)
             file << i + 1 << ',' << familyIncomes[i].getWifeSalary() << ',' << familyIncomes[i].getHusbandSalary() << ',' << familyIncomes[i].getOtherIncome() << ','
             << familyPayments[i].getHousePayment() << ',' << familyPayments[i].getFoodPayment() << ',' << familyPayments[i].getOtherPayment() << ",\n";
         file.close();
+        cout << "Da xuat file excel thanh cong\n";
+        system("pause");
     }
 };
 
