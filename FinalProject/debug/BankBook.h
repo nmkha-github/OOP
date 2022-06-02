@@ -13,14 +13,14 @@ private:
 public: 
 	BankBook(long long moneySaving, Date startDay, Date deadline, double rate);
 	BankBook();
+	long long getMoneySaving();
+	Date getStartDay();
+	Date getDeadline();
+	double getRate();
 	void addMoney(long long val);
 	void setStartDay(Date day);
 	void setDeadline(Date day);
 	void setRate(double val);
-	long long getMoneySaving();
-	double getRate();
-	Date getStartDay();
-	Date getDeadline();
 	long long getProfit(Date time);
 	friend std::ostream& operator<<(std::ostream& out, const BankBook& p);
 };

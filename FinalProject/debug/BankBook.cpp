@@ -18,6 +18,26 @@ BankBook::BankBook()
 	this->rate = 0;
 }
 
+long long BankBook::getMoneySaving()
+{
+	return moneySaving;
+}
+
+Date BankBook::getStartDay()
+{
+	return startDay;
+}
+
+Date BankBook::getDeadline()
+{
+	return deadline;
+}
+
+double BankBook::getRate()
+{
+	return rate;
+}
+
 void BankBook::addMoney(long long val)
 {
 	if (val > 0)
@@ -37,19 +57,6 @@ void BankBook::setDeadline(Date day)
 void BankBook::setRate(double val)
 {
 	rate = val;
-}
-
-long long BankBook::getMoneySaving() {
-	return moneySaving;
-}
-double BankBook::getRate() {
-	return rate;
-}
-Date BankBook::getStartDay() {
-	return startDay;
-}
-Date BankBook::getDeadline() {
-	return deadline;
 }
 
 long long BankBook::getProfit(Date time)

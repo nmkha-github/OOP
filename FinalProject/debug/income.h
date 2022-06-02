@@ -16,7 +16,6 @@ public:
     long long getHusbandSalary();
     long long getOtherIncome();
     long long sumIncome();
-    long long sumSalary();
     friend std::istream& operator>>(std::istream& in, Income& p);
     friend std::ostream& operator<<(std::ostream& out, const Income& p);
 };
