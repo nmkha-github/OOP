@@ -10,6 +10,7 @@ public:
 	int operator-(const Date& p);
 	Date operator=(const Date& p);
 	Date input();
+	void output();
 	friend std::ostream& operator<<(std::ostream& out, Date& p);
 };
 #endif // !1

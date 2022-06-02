@@ -17,6 +17,10 @@ public:
 	void setStartDay(Date day);
 	void setDeadline(Date day);
 	void setRate(double val);
+	long long getMoneySaving();
+	double getRate();
+	Date getStartDay();
+	Date getDeadline();
 	long long getProfit(Date time);
 	friend std::ostream& operator<<(std::ostream& out, const BankBook& p);
 };

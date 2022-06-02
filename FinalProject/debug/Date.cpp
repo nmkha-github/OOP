@@ -44,6 +44,10 @@ Date Date::input()
 	return p;
 }
 
+void Date::output() {
+	std::cout << month << "/" << year;
+}
+
 std::ostream& operator<<(std::ostream& out, Date& p)
 {
 	out << p.month << '/' << p.year;

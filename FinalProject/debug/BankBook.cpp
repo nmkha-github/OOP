@@ -39,6 +39,19 @@ void BankBook::setRate(double val)
 	rate = val;
 }
 
+long long BankBook::getMoneySaving() {
+	return moneySaving;
+}
+double BankBook::getRate() {
+	return rate;
+}
+Date BankBook::getStartDay() {
+	return startDay;
+}
+Date BankBook::getDeadline() {
+	return deadline;
+}
+
 long long BankBook::getProfit(Date time)
 {
 	if (time.year < startDay.year || (time.year == startDay.year && time.month < startDay.month))
