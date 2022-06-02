@@ -17,6 +17,14 @@ int Date::operator-(const Date& p)
 	return this->month + this->year * 12 - p.month - p.year * 12;
 }
 
+Date Date::operator+(const int& p)
+{
+	Date result;
+	result.month = (this->month + p <= 12) ? this->month + p : (this->month + p) - 12;
+	result.year = (this->month + p <= 12) ? this->year : this->year + 1;
+	return result;
+}
+
 Date Date::operator=(const Date& p)
 {
 	this->month = p.month;

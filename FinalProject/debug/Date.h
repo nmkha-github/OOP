@@ -8,6 +8,7 @@ public:
 	Date();
 	Date(int month, int year);
 	int operator-(const Date& p);
+	Date operator+(const int& p);
 	Date operator=(const Date& p);
 	Date input();
 	friend std::ostream& operator<<(std::ostream& out, Date& p);

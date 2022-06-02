@@ -81,10 +81,10 @@ public:
                 option3(familyIncomes, familyPayments);
                 break;
             case 4:
-                option4();
+                option4(familyIncomes, familyPayments, familyBankBooks);
                 break;
             case 5:
-                option5();
+                option5(familyBankBooks);
                 break;
             case 6:
                 exportExcel(familyIncomes, familyPayments, familyLoan, familyBankBooks);
@@ -106,7 +106,7 @@ public:
         bool check = true; // lay ngay tra truoc thoi han
         long long sumBeforeShortLoan = 0;
         long long sumShortLoan = familyLoan.getShortLoan() * (1 + familyLoan.getRate1());
-        for (int i = 0; i < date - Date(5, 2022); i++)
+        for (int i = 0; i <= date - Date(5, 2022); i++)
         {
             long long sumBooks = 0;
             for (int j = 0; j < familyBankBooks.size(); j++) {
@@ -153,7 +153,7 @@ public:
         long long sumLongLoan = familyLoan.getLongLoan() * (1 + familyLoan.getRate2());
         long long sumAfterShortLoan = sumBeforeShortLoan - sumShortLoan;
         check = true;
-        for (int i = 18; i < dateLongLoan - Date(12, 2025); i++) {
+        for (int i = 18; i <= dateLongLoan - Date(12, 2025); i++) {
             long long sumBooks = 0;
             for (int j = 0; j < familyBankBooks.size(); j++) {
                 if (familyBankBooks[j].getDeadline() - dateLongLoan < 0) // truoc thoi han 5/2025 
@@ -222,6 +222,7 @@ public:
         }
         system("pause");
     }
+
     void option2(Income familyIncomes[], Payment familyPayments[], Loan& familyLoan) {
         system("cls");
         cout << "----Chinh sua.\n";
@@ -249,6 +250,7 @@ public:
         cout << "Chinh sua thanh cong.\n";
         system("pause");
     }
+
     void option3(Income familyIncomes[], Payment familyPayments[]) {
         system("cls");
         cout << "----Tinh hinh thu nhap.\n";
@@ -298,17 +300,61 @@ public:
         }
         system("pause");
     }
-    void option4() {
-        
+
+    void option4(Income familyIncomes[], Payment familyPayments[], vector <BankBook>& familyBankBooks) {
+        system("cls");
+        cout << "----Gui tien tiet kiem\n";
+        Date date;
+        date = date.input();
+        cout << "\nLoai ki han:\n1. 6 thang (6%/thang)\n2. 1 nam (6.6%/thang)\n3. Khong gui\n";
+        cout << "Nhap lua chon: "; int q;
+        cin >> q;
+        if (q == 1) {
+            familyBankBooks.push_back({
+                familyIncomes[date - Date(5, 2022)].getHusbandSalary() + familyIncomes[date - Date(5, 2022)].getWifeSalary(),
+                date,
+                date + 6,
+                0.06
+            });
+            familyIncomes[date - Date(5, 2022)].setHusbandSalary(0);
+            familyIncomes[date - Date(5, 2022)].setWifeSalary(0);
+            cout << "Gui thanh cong\n";
+        }
+        else if (q == 2) {
+            familyBankBooks.push_back({
+                familyIncomes[date - Date(5, 2022)].getHusbandSalary() + familyIncomes[date - Date(5, 2022)].getWifeSalary(),
+                date,
+                date + 6,
+                0.066
+            });
+            familyIncomes[date - Date(5, 2022)].setHusbandSalary(0);
+            familyIncomes[date - Date(5, 2022)].setWifeSalary(0);
+            cout << "Gui thanh cong\n";
+        }
+        else if (q > 3) {
+            cout << "Gui khong thanh cong\n";
+        }
+        system("pause");
     }
-    void option5() {
-        
+
+    void option5(vector <BankBook> familyBankBooks) {
+        system("cls");
+        cout << "----Tra cuu so tiet kiem\n";
+        int stt = 0;
+        for (auto book : familyBankBooks) {
+            stt++;
+            cout << "So tiet kiem " << stt << ":\n";
+            cout << "- So tien: " << book.getMoneySaving() << ", " << "lai suat: " << book.getRate() << '\n';
+            cout << "- Ngay gui: " << book.getStartDay().month << '/' << book.getStartDay().year << '\n';
+            cout << "- Ngay het han: " << book.getDeadline().month << '/' << book.getDeadline().year << '\n';
+        }
+        system("pause");
     }
     void exportExcel(Income familyIncomes[], Payment familyPayments[], Loan familyLoan, vector <BankBook> familyBankBooks) {
         cout << "----Xuat file excel.\n";
         cout << "Nhap ten file (.csv): ";
         string fileName; cin >> fileName;
-        std::ofstream file;
+        ofstream file;
         file.open(fileName + ".csv");
         file << "Quan ly thu chi\n";
         file << "So tien no\n";
@@ -331,6 +377,7 @@ public:
         for (int i = 0; i < 36; i++)
             file << i + 1 << ',' << familyIncomes[i].getWifeSalary() << ',' << familyIncomes[i].getHusbandSalary() << ',' << familyIncomes[i].getOtherIncome() << ','
             << familyPayments[i].getHousePayment() << ',' << familyPayments[i].getFoodPayment() << ',' << familyPayments[i].getOtherPayment() << ",\n";
+        file.close();
     }
 };
 
