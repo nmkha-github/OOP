@@ -54,13 +54,13 @@ public:
         bool isRunning = true;
         while (isRunning) {
             system("cls");
-            cout << "0. Thoi diem tra het no. (chua xong)\n";
+            cout << "0. Thoi diem tra het no.\n";
             cout << "1. Tra cuu.\n";
             cout << "2. Chinh sua.\n";
             cout << "3. Tinh hinh thu nhap cua thang (duong, am).\n";
             cout << "4. Gui tiet kiem.\n";
             cout << "5. So tiet kiem.\n";
-            cout << "6. Xuat file excel. (chua xong)\n";
+            cout << "6. Xuat file excel.\n";
             cout << "7. Ket thuc chuong trinh.\n";
             cout << "Nhap yeu cau (0->7): "; cin >> choose;
             while ((choose.size() > 1) || (choose[0] - '0' < 0 && choose[0] - '0' > 7)) {
