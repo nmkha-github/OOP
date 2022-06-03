@@ -105,7 +105,7 @@ public:
         date.year = 2023;
         bool check = true; // lay ngay tra truoc thoi han
         long long sumBeforeShortLoan = 0;
-        long long sumShortLoan = familyLoan.getShortLoan() * (1 + familyLoan.getRate1());
+        long long sumShortLoan = familyLoan.getShortLoan() * (1 + familyLoan.getRate1()*18);
         for (int i = 0; i <= date - Date(5, 2022); i++)
         {
             long long sumBooks = 0;
@@ -135,14 +135,16 @@ public:
             }
             monthShortLoan = d.month;
             yearShortLoan = d.year;
-            cout << "Thoi gian tra truoc no 1 nam ruoi: " << d.month << "/" << d.year << endl;
+            cout << "-Co kha nang tra no 1 nam ruoi\n";
+            cout << "Thoi gian tra: " << d.month << "/" << d.year << endl;
         }
         else {
             if (sumBeforeShortLoan - sumShortLoan >= 0) {
-                cout << "Co kha nang tra no 1 nam ruoi vao 12/2023\n";
+                cout << "-Co kha nang tra no 1 nam ruoi\n";
+                cout << "Thoi gian tra: 12/2023\n";
             }
             else {
-                cout << "Khong co kha nang tra no 1 nam ruoi\n";
+                cout << "-Khong co kha nang tra no 1 nam ruoi\n";
             }
         }
 
@@ -180,7 +182,8 @@ public:
             }
             monthLongLoan = d.month;
             yearLongLoan = d.year;
-            cout << "Thoi gian tra truoc no 3 nam: " << d.month << "/" << d.year << endl;
+            cout << "-Co kha nang tra no 3 nam\n";
+            cout << "Thoi gian tra: " << d.month << "/" << d.year << endl;
         }
         else {
             long long books = 0;
@@ -189,10 +192,13 @@ public:
                 familyBankBooks.erase(familyBankBooks.begin() + i);
             }
             sumAfterShortLoan += books;
-            if (sumLongLoan - sumAfterShortLoan >= 0)
-                cout << "Co kha nang tra no 3 nam vao 5/2025\n";
+            if (sumLongLoan - sumAfterShortLoan >= 0) 
+            {
+                cout << "-Co kha nang tra no 3 nam\n";
+                cout << "Thoi gian tra: 5/2025\n";
+            }
             else
-                cout << "Khong co kha nang tra no 3 nam\n";
+                cout << "-Khong co kha nang tra no 3 nam\n";
         }
         system("pause");
     }
