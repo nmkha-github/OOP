@@ -10,6 +10,8 @@ private:
 	double rate2;
 public:
 	Loan(long long shortLoan, double rate, long long longLoan);
+	void setShortLoan(long long val);
+	void setLongLoan(long long val);
 	void changeRate1(double val);
 	void changeRate2(double val);
 	double getRate1();

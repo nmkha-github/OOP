@@ -8,6 +8,16 @@ Loan::Loan(long long shortLoan, double rate, long long longLoan)
 	this->rate2 = 0.06;
 }
 
+void Loan::setShortLoan(long long val)
+{
+	this->shortLoan = val;
+}
+
+void Loan::setLongLoan(long long val)
+{
+	this->longLoan = val;
+}
+
 void Loan::changeRate1(double val)
 {
 	rate1 = val;
