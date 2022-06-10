@@ -63,10 +63,11 @@ public:
             cout << "2. Chinh sua.\n";
             cout << "3. Tinh hinh thu nhap cua thang (duong, am).\n";
             cout << "4. Gui tiet kiem.\n";
-            cout << "5. So tiet kiem.\n";
+            cout << "5. Tra cuu so tiet kiem ngan hang.\n";
             cout << "6. Xuat file excel.\n";
             cout << "7. Lay du lieu da nhap lan truoc.\n";
-            cout << "8. Ket thuc chuong trinh.\n";
+            cout << "8. So tiet kiem gia dinh.\n";
+            cout << "9. Ket thuc chuong trinh.\n";
             cout << "Nhap yeu cau (0->7): "; cin >> choose;
             while ((choose.size() > 1) || (choose[0] - '0' < 0 && choose[0] - '0' > 8)) {
                 cout << "Moi nhap lai yeu cau (0->7): ";
@@ -94,8 +95,11 @@ public:
             case 6:
                 exportExcel(familyIncomes, familyPayments, familyLoan, familyBankBooks);
                 break;
-            case 7: 
+            case 7:
                 readExcel(familyIncomes, familyPayments, familyLoan, familyBankBooks);
+                break;
+            case 8:
+                option8(familyBankBooks);
                 break;
             default:
                 isRunning = false;
@@ -351,44 +355,20 @@ public:
         system("pause");
     }
 
-    void option5(vector <BankBook>& familyBankBooks) {
+    void option5(vector <BankBook> familyBankBooks) {
         system("cls");
         cout << "----Tra cuu so tiet kiem\n";
-        cout << "Nhap ngay can tra cuu\n";
+        cout << "Nhap ngay bat dau cua so tiet kiem can tra cuu\n";
         Date d;
-        d.input();
+        d = d.input();
         int stt = 0;
-        int num = 0;
         for (auto book : familyBankBooks) {
-            if (book.getDeadline().month <= d.month && book.getDeadline().year <= d.year)
-            {
-                num++;
-                cout << "Co so tiet kiem thu " << stt + 1 << " toi han\n";
-                cout << "Thong tin so tiet kiem\n";
+            stt++;
+            if (book.getStartDay().month == d.month && book.getStartDay().year == d.year) {
+                cout << "So tiet kiem " << stt << ":\n";
                 cout << "- So tien: " << book.getMoneySaving() << ", " << "lai suat: " << book.getRate() << '\n';
                 cout << "- Ngay gui: " << book.getStartDay().month << '/' << book.getStartDay().year << '\n';
                 cout << "- Ngay het han: " << book.getDeadline().month << '/' << book.getDeadline().year << '\n';
-                cout << "1. Rut\n";
-                cout << "2. Khong rut\n";
-                int choice = 0;
-                while (true) {
-                    cin >> choice;
-                    if (choice != 1 && choice != 2)
-                        cout << "Moi nhap lai yeu cau (1->2): ";
-                    else
-                        break;
-                }
-                if (choice == 1)
-                {
-                    book.getProfit(d);
-                    familyBankBooks.erase(familyBankBooks.begin() + stt);
-                }
-                stt++;
-            }
-            else {
-                if (num == 0) {
-                    cout << "Khong co so tiet kiem nao toi han\n";
-                }
             }
         }
         system("pause");
@@ -405,7 +385,7 @@ public:
         file << ",Ngay tra no duoc no:," << monthShortLoan << '/' << yearShortLoan << '\n';
         file << ",Tien no 3 nam:," << familyLoan.getLongLoan() << ",Lai suat (%/nam):," << familyLoan.getRate2() * 100 << '\n';
         file << ",Ngay tra no duoc no:," << monthLongLoan << '/' << yearLongLoan << '\n';
-        
+
         file << '\n' << familyBankBooks.size() << ",So tiet kiem\n";
         file << "STT,So tien,Lai suat,Ngay gui,Ngay het han\n";
         int stt = 0;
@@ -438,14 +418,14 @@ public:
         stringstream s(line);
         string element;
         vector <string> row;
-        while (getline(s, element, ',')) 
+        while (getline(s, element, ','))
             row.push_back(element);
         familyLoan.setShortLoan(stoll(row[2]));
         familyLoan.changeRate1(stod(row[4]) / 100);
 
         getline(file, line); //row 3
         getline(file, line); //row 4
-        s = (stringstream) line;
+        s = (stringstream)line;
         row.clear();
         while (getline(s, element, ','))
             row.push_back(element);
@@ -455,7 +435,7 @@ public:
         getline(file, line); //row 5
         getline(file, line); //row 6
         getline(file, line); //row 7
-        s = (stringstream) line;
+        s = (stringstream)line;
         row.clear();
         while (getline(s, element, ','))
             row.push_back(element);
@@ -464,7 +444,7 @@ public:
         getline(file, line); //row 8
         for (int i = 0; i < nBankBooks; i++) {
             getline(file, line); //row 9 + i
-            s = (stringstream) line;
+            s = (stringstream)line;
             row.clear();
             while (getline(s, element, ','))
                 row.push_back(element);
@@ -483,7 +463,7 @@ public:
         getline(file, line); //row 8 + nBankBooks + 2
         for (int i = 0; i < 36; i++) {
             getline(file, line); //row 8 + nBankBooks + 3 + i
-            s = (stringstream) line;
+            s = (stringstream)line;
             row.clear();
             while (getline(s, element, ','))
                 row.push_back(element);
@@ -491,7 +471,7 @@ public:
                 husbandSalary = stoll(row[2]),
                 otherIncome = stoll(row[3]),
                 housePayment = stoll(row[4]),
-                foodPayment = stoll(row[5]), 
+                foodPayment = stoll(row[5]),
                 otherPayment = stoll(row[6]);
             familyIncomes[i].setWifeSalary(wifeSalary);
             familyIncomes[i].setHusbandSalary(husbandSalary);
@@ -499,6 +479,50 @@ public:
             familyPayments[i].setHousePayment(housePayment);
             familyPayments[i].setFoodPayment(foodPayment);
             familyPayments[i].setOtherPayment(otherPayment);
+        }
+        system("pause");
+    }
+
+    void option8(vector <BankBook>& familyBankBooks) {
+        system("cls");
+        cout << "Kiem tra ngay dao han so tiet kiem\n";
+        cout << "Nhap ngay can tra cuu\n";
+        Date d;
+        d = d.input();
+        int stt = 0;
+        int num = 0;
+        for (auto book : familyBankBooks) {
+            if (book.getDeadline().month <= d.month && book.getDeadline().year <= d.year)
+            {
+                num++;
+                cout << "Co so tiet kiem thu " << stt + 1 << " toi han\n";
+                cout << "Thong tin so tiet kiem\n";
+                cout << "- So tien: " << book.getMoneySaving() << ", " << "lai suat: " << book.getRate() << '\n';
+                cout << "- Ngay gui: " << book.getStartDay().month << '/' << book.getStartDay().year << '\n';
+                cout << "- Ngay het han: " << book.getDeadline().month << '/' << book.getDeadline().year << '\n';
+                cout << "1. Rut\n";
+                cout << "2. Khong rut\n";
+                int choice = 0;
+                while (true) {
+                    cin >> choice;
+                    if (choice != 1 && choice != 2)
+                        cout << "Moi nhap lai yeu cau (1->2): ";
+                    else
+                        break;
+                }
+                if (choice == 1)
+                {
+                    book.getProfit(d);
+                    familyBankBooks.erase(familyBankBooks.begin() + stt);
+                    cout << "Rut so thanh cong\n";
+                }
+                stt++;
+            }
+            else {
+                if (num == 0) {
+                    cout << "Khong co so tiet kiem nao toi han\n";
+                }
+            }
         }
         system("pause");
     }
