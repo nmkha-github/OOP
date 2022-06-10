@@ -69,8 +69,8 @@ public:
             cout << "8. So tiet kiem gia dinh.\n";
             cout << "9. Ket thuc chuong trinh.\n";
             cout << "Nhap yeu cau (0->7): "; cin >> choose;
-            while ((choose.size() > 1) || (choose[0] - '0' < 0 && choose[0] - '0' > 8)) {
-                cout << "Moi nhap lai yeu cau (0->7): ";
+            while ((choose.size() > 1) || (choose[0] - '0' < 0 && choose[0] - '0' > 9)) {
+                cout << "Moi nhap lai yeu cau (0->9): ";
                 cin >> choose;
             }
             switch (choose[0] - '0') {
@@ -99,7 +99,7 @@ public:
                 readExcel(familyIncomes, familyPayments, familyLoan, familyBankBooks);
                 break;
             case 8:
-                option8(familyBankBooks);
+                option8(familyBankBooks, familyIncomes);
                 break;
             default:
                 isRunning = false;
@@ -483,7 +483,7 @@ public:
         system("pause");
     }
 
-    void option8(vector <BankBook>& familyBankBooks) {
+    void option8(vector <BankBook>& familyBankBooks, Income familyIncomes[]) {
         system("cls");
         cout << "Kiem tra ngay dao han so tiet kiem\n";
         cout << "Nhap ngay can tra cuu\n";
@@ -492,7 +492,7 @@ public:
         int stt = 0;
         int num = 0;
         for (auto book : familyBankBooks) {
-            if (book.getDeadline().month <= d.month && book.getDeadline().year <= d.year)
+            if (book.getDeadline() - d <= 0)
             {
                 num++;
                 cout << "Co so tiet kiem thu " << stt + 1 << " toi han\n";
@@ -512,7 +512,8 @@ public:
                 }
                 if (choice == 1)
                 {
-                    book.getProfit(d);
+                    int i = d - Date(5, 2022);
+                    familyIncomes[i].setOtherIncome(book.getProfit(d));
                     familyBankBooks.erase(familyBankBooks.begin() + stt);
                     cout << "Rut so thanh cong\n";
                 }
