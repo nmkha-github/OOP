@@ -99,7 +99,7 @@ public:
                 readExcel(familyIncomes, familyPayments, familyLoan, familyBankBooks);
                 break;
             case 8:
-                option8(familyBankBooks, familyIncomes);
+                option8(familyBankBooks, familyIncomes, familyPayments);
                 break;
             default:
                 isRunning = false;
@@ -342,7 +342,7 @@ public:
             familyBankBooks.push_back({
                 familyIncomes[date - Date(5, 2022)].getHusbandSalary() + familyIncomes[date - Date(5, 2022)].getWifeSalary(),
                 date,
-                date + 6,
+                date + 12,
                 0.066
                 });
             familyIncomes[date - Date(5, 2022)].setHusbandSalary(0);
@@ -358,18 +358,13 @@ public:
     void option5(vector <BankBook> familyBankBooks) {
         system("cls");
         cout << "----Tra cuu so tiet kiem\n";
-        cout << "Nhap ngay bat dau cua so tiet kiem can tra cuu\n";
-        Date d;
-        d = d.input();
         int stt = 0;
         for (auto book : familyBankBooks) {
             stt++;
-            if (book.getStartDay().month == d.month && book.getStartDay().year == d.year) {
-                cout << "So tiet kiem " << stt << ":\n";
-                cout << "- So tien: " << book.getMoneySaving() << ", " << "lai suat: " << book.getRate() << '\n';
-                cout << "- Ngay gui: " << book.getStartDay().month << '/' << book.getStartDay().year << '\n';
-                cout << "- Ngay het han: " << book.getDeadline().month << '/' << book.getDeadline().year << '\n';
-            }
+            cout << "So tiet kiem " << stt << ":\n";
+            cout << "- So tien: " << book.getMoneySaving() << ", " << "lai suat: " << book.getRate() << '\n';
+            cout << "- Ngay gui: " << book.getStartDay().month << '/' << book.getStartDay().year << '\n';
+            cout << "- Ngay het han: " << book.getDeadline().month << '/' << book.getDeadline().year << '\n';
         }
         system("pause");
     }
@@ -483,12 +478,13 @@ public:
         system("pause");
     }
 
-    void option8(vector <BankBook>& familyBankBooks, Income familyIncomes[]) {
+    void option8(vector <BankBook>& familyBankBooks, Income familyIncomes[], Payment familyPayments[]) {
         system("cls");
         cout << "Kiem tra ngay dao han so tiet kiem\n";
         cout << "Nhap ngay can tra cuu\n";
         Date d;
         d = d.input();
+        
         int stt = 0;
         int num = 0;
         for (auto book : familyBankBooks) {
@@ -513,7 +509,7 @@ public:
                 if (choice == 1)
                 {
                     int i = d - Date(5, 2022);
-                    familyIncomes[i].setOtherIncome(book.getProfit(d));
+                    familyIncomes[i].setOtherIncome(familyIncomes[i].getOtherIncome() + book.getProfit(d));
                     familyBankBooks.erase(familyBankBooks.begin() + stt);
                     cout << "Rut so thanh cong\n";
                 }
@@ -525,6 +521,12 @@ public:
                 }
             }
         }
+        long long savingMoney = 0;
+        for (int i = 0; i < d - Date(5, 2022); i++) {
+            savingMoney += familyIncomes[i].getHusbandSalary() + familyIncomes[i].getWifeSalary() + familyIncomes[i].getOtherIncome();
+            savingMoney -= familyPayments[i].sumPayment();
+        }
+        cout << "So tien tiet kiem trong so tiet kiem gia dinh: " << savingMoney << endl;
         system("pause");
     }
 };
