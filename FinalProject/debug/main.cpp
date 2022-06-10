@@ -351,16 +351,45 @@ public:
         system("pause");
     }
 
-    void option5(vector <BankBook> familyBankBooks) {
+    void option5(vector <BankBook>& familyBankBooks) {
         system("cls");
         cout << "----Tra cuu so tiet kiem\n";
+        cout << "Nhap ngay can tra cuu\n";
+        Date d;
+        d.input();
         int stt = 0;
+        int num = 0;
         for (auto book : familyBankBooks) {
-            stt++;
-            cout << "So tiet kiem " << stt << ":\n";
-            cout << "- So tien: " << book.getMoneySaving() << ", " << "lai suat: " << book.getRate() << '\n';
-            cout << "- Ngay gui: " << book.getStartDay().month << '/' << book.getStartDay().year << '\n';
-            cout << "- Ngay het han: " << book.getDeadline().month << '/' << book.getDeadline().year << '\n';
+            if (book.getDeadline().month <= d.month && book.getDeadline().year <= d.year)
+            {
+                num++;
+                cout << "Co so tiet kiem thu " << stt + 1 << " toi han\n";
+                cout << "Thong tin so tiet kiem\n";
+                cout << "- So tien: " << book.getMoneySaving() << ", " << "lai suat: " << book.getRate() << '\n';
+                cout << "- Ngay gui: " << book.getStartDay().month << '/' << book.getStartDay().year << '\n';
+                cout << "- Ngay het han: " << book.getDeadline().month << '/' << book.getDeadline().year << '\n';
+                cout << "1. Rut\n";
+                cout << "2. Khong rut\n";
+                int choice = 0;
+                while (true) {
+                    cin >> choice;
+                    if (choice != 1 && choice != 2)
+                        cout << "Moi nhap lai yeu cau (1->2): ";
+                    else
+                        break;
+                }
+                if (choice == 1)
+                {
+                    book.getProfit(d);
+                    familyBankBooks.erase(familyBankBooks.begin() + stt);
+                }
+                stt++;
+            }
+            else {
+                if (num == 0) {
+                    cout << "Khong co so tiet kiem nao toi han\n";
+                }
+            }
         }
         system("pause");
     }
