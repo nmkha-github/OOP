@@ -522,7 +522,7 @@ public:
             }
         }
         long long savingMoney = 0;
-        for (int i = 0; i < d - Date(5, 2022); i++) {
+        for (int i = 0; i <= d - Date(5, 2022); i++) {
             savingMoney += familyIncomes[i].getHusbandSalary() + familyIncomes[i].getWifeSalary() + familyIncomes[i].getOtherIncome();
             savingMoney -= familyPayments[i].sumPayment();
         }
