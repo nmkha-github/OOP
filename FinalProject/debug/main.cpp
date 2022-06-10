@@ -99,7 +99,7 @@ public:
                 readExcel(familyIncomes, familyPayments, familyLoan, familyBankBooks);
                 break;
             case 8:
-                option8(familyBankBooks, familyIncomes);
+                option8(familyBankBooks, familyIncomes, familyPayments);
                 break;
             default:
                 isRunning = false;
@@ -483,7 +483,7 @@ public:
         system("pause");
     }
 
-    void option8(vector <BankBook>& familyBankBooks, Income familyIncomes[]) {
+    void option8(vector <BankBook>& familyBankBooks, Income familyIncomes[], Payment familyPayments[]) {
         system("cls");
         cout << "Kiem tra ngay dao han so tiet kiem\n";
         cout << "Nhap ngay can tra cuu\n";
@@ -491,12 +491,13 @@ public:
         d = d.input();
         int stt = 0;
         int num = 0;
+        int diff = d - Date(5, 2022);
         for (auto book : familyBankBooks) {
             if (book.getDeadline() - d <= 0)
             {
                 num++;
-                cout << "Co so tiet kiem thu " << stt + 1 << " toi han\n";
-                cout << "Thong tin so tiet kiem\n";
+                cout << "Da tim thay so tiet kiem toi han\n";
+                cout << "Thong tin so tiet kiem:\n";
                 cout << "- So tien: " << book.getMoneySaving() << ", " << "lai suat: " << book.getRate() << '\n';
                 cout << "- Ngay gui: " << book.getStartDay().month << '/' << book.getStartDay().year << '\n';
                 cout << "- Ngay het han: " << book.getDeadline().month << '/' << book.getDeadline().year << '\n';
@@ -512,19 +513,19 @@ public:
                 }
                 if (choice == 1)
                 {
-                    int i = d - Date(5, 2022);
-                    familyIncomes[i].setOtherIncome(book.getProfit(d));
+                    int i = book.getDeadline() - Date(5, 2022);
                     familyBankBooks.erase(familyBankBooks.begin() + stt);
                     cout << "Rut so thanh cong\n";
+                    stt--;
+                    familyIncomes[diff].setOtherIncome(familyIncomes[diff].getOtherIncome() + book.getProfit(d));
                 }
                 stt++;
             }
-            else {
-                if (num == 0) {
-                    cout << "Khong co so tiet kiem nao toi han\n";
-                }
-            }
         }
+        if (num == 0) {
+            cout << "Khong co so tiet kiem nao toi han\n";
+        }
+        cout << "Tong thu nhap thang nay: " << familyIncomes[diff] << endl;
         system("pause");
     }
 };
