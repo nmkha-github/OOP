@@ -68,7 +68,7 @@ public:
             cout << "7. Lay du lieu da nhap lan truoc.\n";
             cout << "8. So tiet kiem gia dinh.\n";
             cout << "9. Ket thuc chuong trinh.\n";
-            cout << "Nhap yeu cau (0->7): "; cin >> choose;
+            cout << "Nhap yeu cau (0->9): "; cin >> choose;
             while ((choose.size() > 1) || (choose[0] - '0' < 0 && choose[0] - '0' > 9)) {
                 cout << "Moi nhap lai yeu cau (0->9): ";
                 cin >> choose;
