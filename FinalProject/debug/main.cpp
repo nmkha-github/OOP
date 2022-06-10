@@ -525,7 +525,7 @@ public:
         if (num == 0) {
             cout << "Khong co so tiet kiem nao toi han\n";
         }
-        cout << "Tong thu nhap thang nay: " << familyIncomes[diff] << endl;
+        cout << "Tong thu nhap thang nay: " << familyIncomes[diff].sumIncome() - familyPayments[diff].sumPayment() << endl;
         system("pause");
     }
 };
